@@ -1,0 +1,124 @@
+======================[2011-11-22 10:43:12,623]======================
+-----[BEGIN]-----
+POST PERSIST
+Tue Nov 22 10:43:12 CST 2011
+User: elbarto
+
+<models.Author>
+@id: 1
+@quotes.ids: 
+@first_name: Alan
+@last_name: Poe
+@years: ***
+-----[ END ]-----
+
+======================[2011-11-22 10:44:08,814]======================
+-----[BEGIN]-----
+POST PERSIST
+Tue Nov 22 10:44:08 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 1
+@author.id: 1
+@quotation: I wish I could write as mysterious as a cat
+-----[ END ]-----
+
+======================[2011-11-22 10:44:18,983]======================
+-----[BEGIN]-----
+POST PERSIST
+Tue Nov 22 10:44:18 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 2
+@author.id: 1
+@quotation: Never more
+-----[ END ]-----
+
+======================[2011-11-22 10:44:30,344]======================
+-----[BEGIN]-----
+POST PERSIST
+Tue Nov 22 10:44:30 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 3
+@author.id: 1
+@quotation: Black cat
+-----[ END ]-----
+
+======================[2011-11-22 10:44:43,960]======================
+-----[BEGIN]-----
+POST REMOVE
+Tue Nov 22 10:44:43 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 3
+@author.id: null
+@quotation: Black cat
+-----[ END ]-----
+
+======================[2011-11-22 10:45:36,504]======================
+-----[BEGIN]-----
+POST PERSIST
+Tue Nov 22 10:45:36 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 4
+@author.id: 1
+@quotation: The Masque of the Red Death
+-----[ END ]-----
+
+======================[2011-11-22 10:45:49,561]======================
+-----[BEGIN]-----
+POST REMOVE
+Tue Nov 22 10:45:49 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 1
+@author.id: 1
+@quotation: I wish I could write as mysterious as a cat
+-----[ END ]-----
+
+======================[2011-11-22 10:45:49,562]======================
+-----[BEGIN]-----
+POST REMOVE
+Tue Nov 22 10:45:49 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 2
+@author.id: 1
+@quotation: Never more
+-----[ END ]-----
+
+======================[2011-11-22 10:45:49,562]======================
+-----[BEGIN]-----
+POST REMOVE
+Tue Nov 22 10:45:49 CST 2011
+User: elbarto
+
+<models.Quote>
+@id: 4
+@author.id: 1
+@quotation: The Masque of the Red Death
+-----[ END ]-----
+
+======================[2011-11-22 10:45:49,563]======================
+-----[BEGIN]-----
+POST REMOVE
+Tue Nov 22 10:45:49 CST 2011
+User: elbarto
+
+<models.Author>
+@id: 1
+@quotes.ids: 1 2 4 
+@first_name: Alan
+@last_name: Poe
+@years: ***
+-----[ END ]-----
+

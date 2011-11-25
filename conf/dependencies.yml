@@ -1,0 +1,4 @@
+self: play -> recordtracking 0.1
+
+require:
+    - play

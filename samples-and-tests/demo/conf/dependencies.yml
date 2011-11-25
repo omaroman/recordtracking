@@ -1,0 +1,15 @@
+# Application dependencies
+
+require:
+    - play
+    - play -> crud
+    - play -> secure
+
+    - recordtracking -> recordtracking
+
+repositories:
+    - test recordtracking module:
+        type:       local
+        artifact:   ${application.path}/../../../[module]
+        contains:
+            - recordtracking -> *

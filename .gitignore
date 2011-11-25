@@ -1,0 +1,13 @@
+*.iml
+/dist/
+*.class
+*.swp
+*.log
+/tmp/*
+/modules/*
+/samples-and-tests/demo/modules/*
+/samples-and-tests/demo/tmp/*
+/samples-and-tests/demo/modules/*
+/samples-and-tests/demo/tmp/*
+/samples-and-tests/demo/logs/*
+/.idea
