@@ -177,6 +177,15 @@ public class RecordTrackingEnhancer extends Enhancer {
             }
         }
 
+        // Print track_data, Uncomment the block just for debugging proposes
+//        code.append("java.util.Iterator entries = track_data.entrySet().iterator();");
+//        code.append("while (entries.hasNext()) {");
+//        code.append("java.util.Map.Entry thisEntry = (java.util.Map.Entry) entries.next();");
+//        code.append("String key = (String) thisEntry.getKey();");
+//        code.append("String value = (String) thisEntry.getValue();");
+//        code.append("play.Logger.debug(\"%s:%s\", new String[]{key, value});");
+//        code.append("}");
+
         code.append("}");   // end method
 
 //        Logger.debug(code.toString());
@@ -218,13 +227,15 @@ public class RecordTrackingEnhancer extends Enhancer {
         code.append("sb.append(\"\\n\");"); // new line
 
         code.append("String key = play.modules.recordtracking.RecordTrackingProps.getSessionKey();");
-        code.append("String user = play.mvc.Scope.Session.current().get(key);");
+        code.append("String user = null;");
         code.append("sb.append(\"User: \");");
-        code.append("if (user != null) {");
+        code.append("try {");
+        code.append("user = play.mvc.Scope.Session.current().get(key);");
         code.append("sb.append(user);");
-        code.append("} else {");
+        code.append("} catch(NullPointerException e){");
         code.append("sb.append(\"UNKNOWN\");");
         code.append("}");
+//        code.append("play.Logger.debug(\"----->SCOPE<-----\", null);");
         code.append("sb.append(\"\\n\");"); // new line
 
         code.append("sb.append(\"\\n\");"); // new line

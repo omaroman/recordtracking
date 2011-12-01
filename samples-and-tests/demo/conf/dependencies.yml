@@ -4,6 +4,7 @@ require:
     - play
     - play -> crud
     - play -> secure
+    - play -> elasticsearch 0.3
 
     - recordtracking -> recordtracking
 

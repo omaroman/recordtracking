@@ -1,0 +1,14 @@
+# Initial Data
+
+Author(a1):
+    years:          30
+    first_name:     Hombre
+    last_name:      Radioactivo
+    track_data:     []
+
+Quote(q1):
+    author:         a1
+    quotation:      "A darle átomos..."
+
+
+
