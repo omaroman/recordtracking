@@ -21,19 +21,6 @@ import play.modules.elasticsearch.annotations.ElasticSearchable;
 @ElasticSearchable
 public class Author extends AuthorAbs {
 
-//    // REVERSE ASSOCIATIONS
-//
-//    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL) // name of the variable in the other object that references this object
-//    public List<Quote> quotes = new ArrayList<Quote>(); // has_many :quotes
-//
-//    // FIELDS
-//
-//    @Required
-//    public String first_name;
-//
-//    @Required
-//    public String last_name;
-
     @Mask
     public int years;   // Just for testing purposes, the plug-in detects the field as a Primitive and uses a Wrapper and masks the value
 

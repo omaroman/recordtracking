@@ -31,9 +31,4 @@ public class AuthorAbs extends Model {
 
     @Required
     public String last_name;
-
-    // Custom formatRecordTracking method
-//    public String formatRecordTracking(String event) {
-//        return "\n" + "YOU WILL KNOW NOTHING FROM ME, :p!!!" + "\n";
-//    }
 }
