@@ -14,8 +14,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import play.modules.elasticsearch.annotations.ElasticSearchable;
+
 @Entity
 @Table(name = "authors")
+@ElasticSearchable
 public class Author extends AuthorAbs {
 
 //    // REVERSE ASSOCIATIONS

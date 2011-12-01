@@ -11,9 +11,12 @@ import play.modules.recordtracking.annotations.NoTracking;
 
 import javax.persistence.*;
 
+import play.modules.elasticsearch.annotations.ElasticSearchable;
+
 @Entity
 @Table(name = "quotes")
 //@NoTracking
+@ElasticSearchable
 public class Quote extends Model {
 
     // Associations

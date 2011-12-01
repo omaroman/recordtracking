@@ -5,6 +5,7 @@ require:
     - play -> crud
     - play -> secure
     - play -> elasticsearch 0.3
+#    - play -> associations 1.0.1
 
     - recordtracking -> recordtracking
 
