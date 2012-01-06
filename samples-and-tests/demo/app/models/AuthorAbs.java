@@ -10,10 +10,7 @@ import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,10 @@ public class AuthorAbs extends Model {
     // REVERSE ASSOCIATIONS
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
-    public List<Quote> quotes = new ArrayList<Quote>(); // has_many :quotes
+    public List<Quote> quotes; // = new ArrayList<Quote>(); // has_many :quotes
+
+//    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
+//    public Quote quote;
 
     // FIELDS
 
@@ -33,4 +33,5 @@ public class AuthorAbs extends Model {
 
     @Required
     public String last_name;
+
 }

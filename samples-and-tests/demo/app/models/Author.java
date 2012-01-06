@@ -25,5 +25,4 @@ public class Author extends AuthorAbs {
 //        return "\n" + "YOU WILL KNOW NOTHING FROM ME, :p!!!" + "\n";
 //    }
 
-
 }

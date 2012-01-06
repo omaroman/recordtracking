@@ -141,34 +141,56 @@ public class RecordTrackingEnhancer extends Enhancer {
 
             for (CtField ctField : persistentFields) {
                 if (EnhancerUtility.isRelationship(ctField)) {
-                    if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {    // A Collection (Set or List)
+                    if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {
+                        // one-to-many (@OneToMany) or many-to-one (@ManyToOne) or many-to-many (@ManyToMany) association - A Collection (Set or List)
                         // Just get the id of every single object in the collection
                         code.append("key = \"@").append(ctField.getName()).append("_ids\";");
-                        code.append("StringBuilder value = new StringBuilder();");
+                        code.append("StringBuilder valueSB = new StringBuilder();");
+                        code.append("if (").append(ctField.getName()).append(" != null) {");
                         code.append("for (java.util.Iterator i =").append(ctField.getName()).append(".iterator(); i.hasNext(); ) {");
-                        code.append("play.db.jpa.Model model = (play.db.jpa.Model) i.next();"); // Cast to Model
-                        code.append("value.append(model.id).append(' ');");
+                        code.append("play.db.jpa.Model model = (play.db.jpa.Model) i.next();"); // Cast to Model (or to What???)
+                        code.append("if (model == null || model.id == null) {");
+                        code.append("valueSB.append(\"null\").append(' ');");
+                        code.append("} else {");
+                        code.append("valueSB.append(model.id).append(' ');");
+                        code.append("}");   // end if
                         code.append("}");   // end for
-                        code.append("track_data.put(key, value.toString());");
-                    } else {    // one-to-one association
+                        code.append("} else {");
+                        code.append("valueSB.append(\"null\");");
+                        code.append("}");   // end if
+                        code.append("track_data.put(key, valueSB.toString());");
+                    } else {    // one-to-one association (@OneToOne)
                         code.append("key = \"@").append(ctField.getName()).append("_id\";");
-                        code.append("value = ").append(ctField.getName()).append(".id.toString();");
+                        code.append("play.db.jpa.Model model = ").append("(play.db.jpa.Model)this.").append(ctField.getName()).append(";");
+                        code.append("if (model == null || model.id == null) {");
+                        code.append("value = \"null\";");
+                        code.append("} else {");
+                        code.append("value = model.id.toString();");
+                        code.append("}");   // end if
                         code.append("track_data.put(key, value);");
                     }
                 } else {  // Non-Relationship Field
-                    if (EnhancerUtility.hasAnnotation(ctField, Mask.class.getName())) {
+                    if (EnhancerUtility.hasAnnotation(ctField, Mask.class.getName())) { // Mask Value
                         if (ctField.getType().isPrimitive()) {
                             // Create and instance wrapper of the primitive in order to invoke its toString method
                             code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ").append(buildNewPrimitiveWrapper(ctField)).append(".toString().length());");
                         } else {
+                            code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
+                            code.append("value = \"null\";");
+                            code.append("} else {");
                             code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString().length());");
+                            code.append("}");   // end if
                         }
-                    } else {
+                    } else {    // NO Mask Value
                         if (ctField.getType().isPrimitive()) {
                             // Create and instance wrapper of the primitive in order to invoke its toString method
-                            code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ").append(buildNewPrimitiveWrapper(ctField)).append(".toString().length());");
+                            code.append("value = (").append(buildNewPrimitiveWrapper(ctField)).append(").toString();");
                         } else {
+                            code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
+                            code.append("value = \"null\";");
+                            code.append("} else {");
                             code.append("value = ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString();");
+                            code.append("}");   // end if
                         }
                     }
                     code.append("key = \"@").append(ctField.getName()).append("\";");
@@ -188,7 +210,7 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         code.append("}");   // end method
 
-//        Logger.debug(code.toString());
+//        Logger.debug(code.toString());    // print the injected code
 
         final CtMethod fillTrackData = CtMethod.make(code.toString(), ctClass);
         ctClass.addMethod(fillTrackData);
@@ -253,11 +275,7 @@ public class RecordTrackingEnhancer extends Enhancer {
         code.append("while(i.hasNext()) {");
         code.append("java.util.Map.Entry me = (java.util.Map.Entry)i.next();");
         code.append("sb.append((String)me.getKey()).append(':');");
-        code.append("try {");
         code.append("sb.append((String)me.getValue());");
-        code.append("} catch(NullPointerException e){");
-        code.append("sb.append(\"null\");");
-        code.append("}");
         code.append("sb.append(\"\\n\");"); // new line
         code.append("}");   // end while
 
