@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/layout.css'}">
-        #{get 'moreStyles' /}
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <!--BEGIN STYLESHEETS SECTION-->
+        #{stylesheet '52/reset.css' /}
+        #{stylesheet '52/general.css' /}<!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
+        #{stylesheet '52/grid.css' /}<!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
+        #{stylesheet '52/grid_ext.css' /}
+        #{stylesheet '52/layout.css' /}<!-- layout -->
+        #{stylesheet '52/css3.css' /}<!-- in the CSS3 stylesheet you will find examples of some great new features CSS has to offer -->
+        #{stylesheet '52/text.css' /}
+        #{stylesheet 'my_header.css' /}
+        #{stylesheet 'menu.css' /}<!-- menu -->
+        #{stylesheet 'my_footer.css' /}
+
+        *{#{stylesheet 'validationEngine.jquery.css' /}}*<!-- validationEngine theme -->
+        *{#{stylesheet 'forms.css' /}}*<!-- special styling for forms, this can be used as a form framework on its own -->
+        *{#{stylesheet 'tabs.css' /}}*<!-- tabs -->
+        *{#{stylesheet 'font.css' /}}*<!-- font -->
+        *{#{stylesheet 'my_style.css' /}}*<!-- my own css -->
+
+        #{get 'moreStyles' /}
+        <!--END STYLESHEETS SECTION-->
+        <!--BEGIN JAVASCRIPTS SECTION-->
+        #{script 'jquery-1.7.1.min.js' /}
+        *{#{script 'jquery.tools-1.2.6.min.js' /}}*
+        *{#{script 'jquery-ui-1.8.16.custom.min.js' /}}*
         #{get 'moreScripts' /}
+        <!--END JAVASCRIPTS SECTION-->
     </head>
-    <body>
-        <div id="outline">
-            *{<img src="@{'public/images/reverseproxy/gradient.jpg'}" alt="" height="304" width="800" border="0" />}*
+    <body role="application">
+        <div class="clear" style="height:20px;"></div>
+        <div role="container">
+            #{include "layouts/_header.html" /}
+            #{include "layouts/_menu.html" /}
             #{doLayout /}
+            #{include "layouts/_footer.html" /}
         </div>
     </body>
 </html>

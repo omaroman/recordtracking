@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                                       ApplicationController.index
+GET     /                                       Application.index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -16,6 +16,9 @@ GET     /public/                                staticDir:public
 
 # Import Secure routes
 *       /                                       module:secure
+
+GET     /author/add                             Application.add
+POST    /author/create                          Application.create
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}

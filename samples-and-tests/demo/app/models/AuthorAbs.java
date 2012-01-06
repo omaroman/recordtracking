@@ -7,6 +7,7 @@
 package models;
 
 import play.data.validation.Required;
+import play.data.validation.Unique;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,7 @@ public class AuthorAbs extends Model {
     // FIELDS
 
     @Required
+    @Unique
     public String first_name;
 
     @Required

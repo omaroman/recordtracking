@@ -231,9 +231,13 @@ public class RecordTrackingEnhancer extends Enhancer {
         code.append("sb.append(\"User: \");");
         code.append("try {");
         code.append("user = play.mvc.Scope.Session.current().get(key);");
+        code.append("if (user == null) {");
+        code.append("sb.append(\"_UNKNOWN_\");");
+        code.append("} else {");
         code.append("sb.append(user);");
-        code.append("} catch(NullPointerException e){");
-        code.append("sb.append(\"UNKNOWN\");");
+        code.append("}");
+        code.append("} catch(NullPointerException e){"); // via yml loading
+        code.append("sb.append(\"_YAML_\");");
         code.append("}");
 //        code.append("play.Logger.debug(\"----->SCOPE<-----\", null);");
         code.append("sb.append(\"\\n\");"); // new line
@@ -249,7 +253,11 @@ public class RecordTrackingEnhancer extends Enhancer {
         code.append("while(i.hasNext()) {");
         code.append("java.util.Map.Entry me = (java.util.Map.Entry)i.next();");
         code.append("sb.append((String)me.getKey()).append(':');");
+        code.append("try {");
         code.append("sb.append((String)me.getValue());");
+        code.append("} catch(NullPointerException e){");
+        code.append("sb.append(\"null\");");
+        code.append("}");
         code.append("sb.append(\"\\n\");"); // new line
         code.append("}");   // end while
 

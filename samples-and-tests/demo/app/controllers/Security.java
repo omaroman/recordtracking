@@ -6,9 +6,6 @@
 
 package controllers;
 
-import play.Logger;
-import play.Play;
-
 public class Security extends Secure.Security {
 
     public static boolean check(String profile) {

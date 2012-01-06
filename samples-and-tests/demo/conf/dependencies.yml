@@ -4,14 +4,23 @@ require:
     - play
     - play -> crud
     - play -> secure
-    - play -> elasticsearch 0.3
-#    - play -> associations 1.0.1
+    - play -> revprox 0.1
 
     - recordtracking -> recordtracking
 
+#    - net.parnassoft -> utilities 0.2:
+#        transitive: false
+
 repositories:
-    - test recordtracking module:
+    - test-recordtracking:
         type:       local
         artifact:   ${application.path}/../../../[module]
         contains:
             - recordtracking -> *
+
+#    - parnassoft:
+#            type:       http
+#            artifact:   "https://github.com/omaroman/utilities/tree/master/dist/[artifact]-[revision].jar"
+#            contains:
+#                - net.parnassoft -> *
+

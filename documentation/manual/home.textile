@@ -16,7 +16,11 @@ Set the following properties in conf/application.conf
 
 bc. recordtracking.sessionKey=username
 
-This propoerty is for obtaining the *User* from the session cookie, if the application doesn't use sessions, then user name is recorded as *UNKNOWN*
+This propoerty is for obtaining the *User* from the session cookie.
+
+p(note). If the application doesn't use sessions, then *user* name is recorded as <code>==_UNKNOWN_==</code>
+
+p(note). If any data is loaded via yaml, then *user* name is recorded as <code>==_YAML_==</code>
 
 h2. Logs
 
@@ -61,6 +65,7 @@ By default, the data model is formatted as follows:
 - The event name
 - The event date
 - The user who triggered the event
+- An empty line
 - The model name
 - The fields (preceded by @) and its values, including associations id's
 - The string: -----[ END ]-----
@@ -151,7 +156,7 @@ Don't forget to run _play deps_ so that it resolves dependencies.
 
 h2. Play-Utilities
 
-This module uses a small API: "play-utilities":https://github.com/omaroman/play-utilities
+This module uses a small API: play "utilities":https://github.com/omaroman/utilities
 
 h2. TODO
 
