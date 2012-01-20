@@ -11,21 +11,25 @@ import play.data.validation.Unique;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @MappedSuperclass
-public class AuthorAbs extends Model {
+public abstract class AuthorAbs extends Model {
 
     // REVERSE ASSOCIATIONS
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
     public List<Quote> quotes; // = new ArrayList<Quote>(); // has_many :quotes
+//    @Transient private Quote quotesCastType;    // Due to type erasure, RecordTracking needs to be instructed which is the collection type
 
 //    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
 //    public Quote quote;
 
     // FIELDS
+
+//    @Id
+//    @GeneratedValue
+//    public Long pk;
 
     @Required
     @Unique

@@ -4,11 +4,11 @@ h2. What is RecordTracking?
 
 RecordTracking unobtrusively tracks the *creation*, *updating* and *elimination* events regarding to records.
 When one of those events occurs, writes into a log:
--   The name of the action
--   The date when the action was invoked
--   The user who invoked the event
--   The name of the model
--   The model data including association id's
+- The name of the action
+- The date when the action was invoked
+- The user who invoked the event
+- The name of the model
+- The model data including association id's
 
 h2. Configuration
 
@@ -112,11 +112,11 @@ Custom formatRecordTracking method
 
 h2. How it works
 
-It enhances via bytecode all persistent models.
+It enhances via byte-code all persistent models.
 
 A transient field is injected:
 
-@Transient Map track_data;
+bc. @Transient Map track_data;
 
 The following methods are injected:
 
@@ -134,19 +134,47 @@ then the logic is just inserted at the beginning of the annotated method, depend
 When a PRE-Event is triggered the data to be record is stored into a transient Map (_track_data_), afterwards when
 a POST-Event is triggered the _formatRecordTracking_ method is invoked which in turns invokes log4j so that the data is being recorded.
 
+h2. WARNING: Collection Cast Type
+
+h3. Erasure Type
+
+Java implements generics with type erasure. The compiler uses this type information only for safety checks, the byte code doesn't contain any information about generic types.
+Consequently, the runtime doesn't know about it either, so you cannot retrieve it by reflection.
+
+h3. Cast Type
+
+When there's a one-to-many, many-to-one or many-to-many relationship, the model having that association field, needs to specify explicitly the type of the collection.
+By convention, that cast type must be named as follows:
+
+collectionFieldName + CastType
+
+E.g.,
+
+bc. public class Author extends GenericModel {
+    .
+    // REVERSE ASSOCIATIONS
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
+    public List<Quote> quotes; // has_many :quotes
+    @Transient private Quote quotesCastType; // Due to type erasure, RecordTracking needs to be instructed which is the collection type
+    .
+    // FIELDS
+    @Id
+    @GeneratedValue
+    public Long pk;
+}
+
+If all models inherit from *play.db.jpa.Model* then the cast-type field is not needed
+
+TODO: When enhancing, check if the class is an instance of play.db.jpa.Model
+
 h2. Limitations
-
-h3. play.db.jpa.Model
-
-This initial version only works with models that inherit from play.db.jpa.Model.
-If any of the models inherits far beyond from JPABase -> GenericModel -> Model, then RecordTracking won't know where to get the association id's.
 
 h3. Association annotations and FetchType
 
 With the @OneToOne, @OneToMany and @ManyToOne annotations, JPA by default assigns EAGER FetchType, if you change this behavior to LAZY
 the module won't be able to delete the Object which owns the association.
 
-I'm not very good at JPA and I don't know why this behavior happen.
+I'm not very good at JPA and I don't know why this behavior happens.
 *_If any one knows I'd really appreciate the collaboration._*
 
 h2. Sample application
@@ -160,7 +188,8 @@ This module uses a small API: play "utilities":https://github.com/omaroman/utili
 
 h2. TODO
 
-* Improve the module in order to work with models that inherit from GenericModel, i.e., find the fields annotated with @Id
+* Indicate via configuration if all models inherit from play.db.jpa.Model...
+Improve the module in order to work with models that inherit from GenericModel, i.e., find the fields annotated with @Id
 
 * Write into a single block all chained events triggered by a cascade event.
 

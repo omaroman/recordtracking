@@ -9,8 +9,6 @@ package play.modules.recordtracking;
 import play.Play;
 import play.PlayPlugin;
 import play.classloading.ApplicationClasses;
-import play.db.jpa.GenericModel;
-import play.db.jpa.JPABase;
 import play.exceptions.ConfigurationException;
 import play.modules.recordtracking.interfaces.Trackable;
 
@@ -39,7 +37,7 @@ public class RecordTrackingPlugin extends PlayPlugin {
         }
 
 //        RecordTrackingProps.loggerConf = Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "loggerConf", RecordTrackingProps.DEFAULT_XML_CONF_LOGGER_PATH); // "recordtracking.xml"
-        RecordTrackingProps.logMasked = Boolean.parseBoolean(Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "logMasked", "false"));
+        RecordTrackingProps.allEntitiesInheritsFromModel = Boolean.parseBoolean(Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "allEntitiesInheritsFromModel", "true"));
         RecordTrackingProps.sessionKey = Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "sessionKey", "username"); //maybe email
         RecordTrackingLogger.getInstance();
     }

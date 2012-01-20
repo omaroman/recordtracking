@@ -6,22 +6,23 @@
 package play.modules.recordtracking;
 
 import javassist.*;
-import javassist.bytecode.*;
-import net.parnassoft.playutilities.EnhancerUtility;
-
+import javassist.bytecode.AnnotationsAttribute;
+import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
-
+import net.parnassoft.playutilities.EnhancerUtility;
+import play.Logger;
 import play.classloading.ApplicationClasses.ApplicationClass;
 import play.classloading.enhancers.Enhancer;
-
-import play.Logger;
+import play.db.jpa.Model;
 import play.modules.recordtracking.annotations.Mask;
 import play.modules.recordtracking.annotations.NoTracking;
+import play.modules.recordtracking.exceptions.RecordTrackingException;
 import play.modules.recordtracking.interfaces.Trackable;
 
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class RecordTrackingEnhancer extends Enhancer {
 
@@ -46,12 +47,12 @@ public class RecordTrackingEnhancer extends Enhancer {
 
 //        createMethodOnPrePersist();
         createMethodOnPostPersist();
-        createMethodOnPreRemove();
+//        createMethodOnPreRemove();
         createMethodOnPostRemove();
         createMethodOnPreUpdate();
         createMethodOnPostUpdate();
 
-        Logger.debug("ENHANCED: %s.%s", ctClass.getPackageName(), ctClass.getName());
+        Logger.debug("ENHANCED: %s", ctClass.getName());
 
 		// Done - Enhance Class.
 		appClass.enhancedByteCode = ctClass.toBytecode();
@@ -106,7 +107,7 @@ public class RecordTrackingEnhancer extends Enhancer {
 
     private void createTrackDataField() throws CannotCompileException {
         // Create track_data field
-        String code = "java.util.Map track_data = new java.util.LinkedHashMap();";
+        String code = "java.util.Map track_data;";
         final CtField track_data = CtField.make(code, ctClass);
         ctClass.addField(track_data);
 
@@ -122,19 +123,17 @@ public class RecordTrackingEnhancer extends Enhancer {
      * @throws CannotCompileException -
      * @throws ClassNotFoundException -
      * @throws NotFoundException -
+     * @throws RecordTrackingException -
      */
-    private void createFillTrackDataMethod() throws CannotCompileException, ClassNotFoundException, NotFoundException {
+    private void createFillTrackDataMethod() throws CannotCompileException, ClassNotFoundException, NotFoundException, RecordTrackingException {
         StringBuilder code = new StringBuilder();
         code.append("public void _fill_track_data() {");
+        code.append("track_data = new java.util.LinkedHashMap();");
 
         List<CtClass> mappedSupperClasses = EnhancerUtility.mappedSuperClassesUpToModel(ctClass);
-        mappedSupperClasses.add(0, ctClass);    // add at first place
-        Collections.reverse(mappedSupperClasses); // Reverse the order of fields
 
         code.append("String key = null;");
         code.append("String value = null;");
-
-        // TODO: Find the field annotated with @Id (and its class in order to do the cast???)
 
         for (CtClass ctClass : mappedSupperClasses) {
             List<CtField> persistentFields = EnhancerUtility.getAllPersistentFields(ctClass);
@@ -144,15 +143,36 @@ public class RecordTrackingEnhancer extends Enhancer {
                     if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {
                         // one-to-many (@OneToMany) or many-to-one (@ManyToOne) or many-to-many (@ManyToMany) association - A Collection (Set or List)
                         // Just get the id of every single object in the collection
+
+                        // NOTE:
+                        // Java implements generics with type erasure. The compiler uses this type information only for
+                        // safety checks, the byte code doesn't contain any information about generic types.
+                        // Consequently, the runtime doesn't know about it either, so you cannot retrieve it by reflection.
+
+                        String modelClass = Model.class.getName();
+                        String idField = "id";
+                        if (!RecordTrackingProps.allEntitiesInheritsFromModel) {
+                            if (!EnhancerUtility.inheritsFromModel(ctField.getType())) {
+                                CtField field = ctClass.getField(String.format("%sCastType", ctField.getName()));
+                                if (field == null) {
+                                    String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
+                                    throw new RecordTrackingException(error);
+                                }
+                                CtClass castType = classPool.get(field.getType().getName());
+                                Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(castType);
+                                modelClass = modelWithId.getKey().getName();
+                                idField = modelWithId.getValue().getName();
+                            }
+                        }
                         code.append("key = \"@").append(ctField.getName()).append("_ids\";");
                         code.append("StringBuilder valueSB = new StringBuilder();");
                         code.append("if (").append(ctField.getName()).append(" != null) {");
                         code.append("for (java.util.Iterator i =").append(ctField.getName()).append(".iterator(); i.hasNext(); ) {");
-                        code.append("play.db.jpa.Model model = (play.db.jpa.Model) i.next();"); // Cast to Model (or to What???)
-                        code.append("if (model == null || model.id == null) {");
+                        code.append(modelClass).append(" model = (").append(modelClass).append(") i.next();"); // Cast to Model (or to What???)
+                        code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
                         code.append("valueSB.append(\"null\").append(' ');");
                         code.append("} else {");
-                        code.append("valueSB.append(model.id).append(' ');");
+                        code.append("valueSB.append(((").append(modelClass).append(")model).").append(idField).append(").append(' ');");
                         code.append("}");   // end if
                         code.append("}");   // end for
                         code.append("} else {");
@@ -160,12 +180,22 @@ public class RecordTrackingEnhancer extends Enhancer {
                         code.append("}");   // end if
                         code.append("track_data.put(key, valueSB.toString());");
                     } else {    // one-to-one association (@OneToOne)
+                        String modelClass = Model.class.getName();
+                        String idField = "id";
+                        if (!RecordTrackingProps.allEntitiesInheritsFromModel) {
+                            if (!EnhancerUtility.inheritsFromModel(ctField.getType())) {
+                                Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
+                                modelClass = modelWithId.getKey().getName();
+                                idField = modelWithId.getValue().getName();
+                            }
+                        }
+
                         code.append("key = \"@").append(ctField.getName()).append("_id\";");
-                        code.append("play.db.jpa.Model model = ").append("(play.db.jpa.Model)this.").append(ctField.getName()).append(";");
-                        code.append("if (model == null || model.id == null) {");
+                        code.append(modelClass).append(" model = (").append(modelClass).append(")this.").append(ctField.getName()).append(";");
+                        code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
                         code.append("value = \"null\";");
                         code.append("} else {");
-                        code.append("value = model.id.toString();");
+                        code.append("value = ((").append(modelClass).append(")model).").append(idField).append(".toString();");
                         code.append("}");   // end if
                         code.append("track_data.put(key, value);");
                     }
@@ -261,13 +291,14 @@ public class RecordTrackingEnhancer extends Enhancer {
         code.append("} catch(NullPointerException e){"); // via yml loading
         code.append("sb.append(\"_YAML_\");");
         code.append("}");
-//        code.append("play.Logger.debug(\"----->SCOPE<-----\", null);");
         code.append("sb.append(\"\\n\");"); // new line
 
         code.append("sb.append(\"\\n\");"); // new line
 
         code.append("sb.append(\"<").append(ctClass.getName()).append(">\");");   // Model name
         code.append("sb.append(\"\\n\");"); // new line
+
+        // TODO: If track_data is null then iterate over the real persistent fields
 
         // The persistent fields...
         code.append("java.util.Set set = track_data.entrySet();");   // Get a set of the entries
@@ -407,7 +438,7 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         StringBuilder code = new StringBuilder();
 //        String debug = "play.Logger.debug(\"SCOPE -> %s.onPostRemove\", new String[]{this.getClass().getName()});";
-        String info = "play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST REMOVE\"));";
+        String info = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST REMOVE\"));";
 
         if (methodWithPostRemoveAnnot != null) {
 //            code.append(debug);
@@ -440,19 +471,37 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         StringBuilder code = new StringBuilder();
 //        String debug = "play.Logger.debug(\"SCOPE -> %s.onPreUpdate\", new String[]{this.getClass().getName()});";
-        String info = "_fill_track_data();";
+
+        // 1 - Get the entity from the DB -> model = Model.findById(entity.id)
+        // 2 - model._fill_track_data();
+        // 3 - Write into log
+//        code.append(ctClass.getName()).append(" model = (").append(ctClass.getName()).append(")").append("GenericModel.findById(((").append(Model.class.getName()).append(")this).id);");
+//        code.append("model._fill_track_data();");
+
+//        String info = "_fill_track_data();";
+
+        code.append("Long id = ((").append(Model.class.getName()).append(")this).id;");
+        code.append(ctClass.getName()).append(" model = (").append(ctClass.getName()).append(")").append(ctClass.getName()).append(".findById(id);");
+        if (ctClass.getName().equals("models.Author")) {
+            code.append("play.Logger.debug(\"NAME: %s\", new String[]{model.first_name});");
+        }
+        code.append("model._fill_track_data();");
+        code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(model.formatRecordTracking(\"PRE UPDATE\"));");
 
         if (methodWithPreUpdateAnnot != null) {
 //            code.append(debug);
-            code.append(info);
+//            code.append(info);
             methodWithPreUpdateAnnot.insertBefore(code.toString());
 		} else {
+            String tmpCode = code.toString();
+            code = new StringBuilder();
             code.append("public void onPreUpdate() { ");
 //            code.append(debug);
-            code.append(info);
+//            code.append(info);
+            code.append(tmpCode);
             code.append("}");
 
-//            Logger.debug("PostUpdate code%n%s", code.toString());
+            Logger.debug("PostUpdate code%n%s", code.toString());
 
             final CtMethod onPreUpdate = CtMethod.make(code.toString(), ctClass);
             ctClass.addMethod(onPreUpdate);
@@ -473,7 +522,7 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         StringBuilder code = new StringBuilder();
 //        String debug = "play.Logger.debug(\"SCOPE -> %s.onPostUpdate\", new String[]{this.getClass().getName()});";
-        String info = "play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST UPDATE\"));";
+        String info = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST UPDATE\"));";
 
         if (methodWithPostUpdateAnnot != null) {
 //            code.append(debug);

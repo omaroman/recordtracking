@@ -7,9 +7,11 @@ package models;
 
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.modules.recordtracking.annotations.NoTracking;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "quotes")
@@ -27,6 +29,13 @@ public class Quote extends Model {
 
     // Fields
 
+//    @Id
+//    @GeneratedValue
+//    public Long pk;
+
     @Required
     public String quotation;
+
+
+
 }

@@ -4,7 +4,7 @@ require:
     - play
     - play -> crud
     - play -> secure
-    - play -> revprox 0.1
+#    - play -> recordtracking 0.1
 
     - recordtracking -> recordtracking
 

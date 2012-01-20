@@ -15,14 +15,15 @@ public class RecordTrackingProps {
 //    static String loggerConf = null;
 
     static String sessionKey = null;
-    static boolean logMasked = false;
-
+    static boolean allEntitiesInheritsFromModel = true;
 
     public static String getSessionKey() {
         return sessionKey;
     }
 
-    public boolean shouldLogMasked() {
-        return logMasked;
+    public boolean doesAllEntitiesInheritsFromModel() {
+        return allEntitiesInheritsFromModel;
     }
+
+
 }
