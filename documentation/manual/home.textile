@@ -188,10 +188,8 @@ This module uses a small API: play "utilities":https://github.com/omaroman/utili
 
 h2. TODO
 
-* Indicate via configuration if all models inherit from play.db.jpa.Model...
-Improve the module in order to work with models that inherit from GenericModel, i.e., find the fields annotated with @Id
-
 * Write into a single block all chained events triggered by a cascade event.
+* Improve the sample demo
 
 I tried to achieve the same functionality by events callback, but I have to modify two classes of the play framework.
 
