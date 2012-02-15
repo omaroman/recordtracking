@@ -6,22 +6,20 @@
 package models;
 
 import play.data.validation.Required;
+import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "quotes")
 //@NoTracking
-public class Quote extends Model {
+public class Quote extends GenericModel {
 
     // Associations
 
     @ManyToOne() // Optional, targetEntity for indicating where's the relationship
-    @JoinColumn(name = "author_id") // name of the FK field in this table
+    @JoinColumn(name = "author_pk") // name of the FK field in this table
     // --
     @Required
     public Author author;   // belongs_to_one :author
@@ -29,9 +27,9 @@ public class Quote extends Model {
 
     // Fields
 
-//    @Id
-//    @GeneratedValue
-//    public Long pk;
+    @Id
+    @GeneratedValue
+    public Long pk;
 
     @Required
     public String quotation;

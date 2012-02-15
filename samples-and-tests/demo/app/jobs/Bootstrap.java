@@ -17,10 +17,10 @@ public class Bootstrap extends Job {
     public void doJob() {
 
 //        Fixtures.deleteAllModels();
-        if (models.Author.count() == 0) {
+        /*if (models.Author.count() == 0) {
             Fixtures.loadModels("initial-data.yml");
             play.Logger.info("Loaded initial data");
-        }
+        }*/
 
     }
 }

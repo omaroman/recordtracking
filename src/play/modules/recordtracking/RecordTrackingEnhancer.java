@@ -13,6 +13,7 @@ import net.parnassoft.playutilities.EnhancerUtility;
 import play.Logger;
 import play.classloading.ApplicationClasses.ApplicationClass;
 import play.classloading.enhancers.Enhancer;
+import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
 import play.modules.recordtracking.annotations.Mask;
 import play.modules.recordtracking.annotations.NoTracking;
@@ -20,9 +21,16 @@ import play.modules.recordtracking.exceptions.RecordTrackingException;
 import play.modules.recordtracking.interfaces.Trackable;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
+import java.beans.XMLEncoder;
+import java.beans.XMLDecoder;
 
 public class RecordTrackingEnhancer extends Enhancer {
 
@@ -258,7 +266,7 @@ public class RecordTrackingEnhancer extends Enhancer {
             Logger.debug("Skip creation of formatRecordTracking method for %s.%s", ctClass.getPackageName(), ctClass.getName());
             return;
         }
-        Logger.debug("Creating formatRecordTracking method for %s.%s", ctClass.getPackageName(), ctClass.getName());
+        Logger.debug("Creating formatRecordTracking method for %s", ctClass.getName());
 
         List<CtClass> mappedSupperClasses = EnhancerUtility.mappedSuperClassesUpToModel(ctClass);
         mappedSupperClasses.add(0, ctClass);    // add at first place
@@ -472,36 +480,72 @@ public class RecordTrackingEnhancer extends Enhancer {
         StringBuilder code = new StringBuilder();
 //        String debug = "play.Logger.debug(\"SCOPE -> %s.onPreUpdate\", new String[]{this.getClass().getName()});";
 
-        // 1 - Get the entity from the DB -> model = Model.findById(entity.id)
+        /*
+        EXPLICIT SAVE (taken from http://www.playframework.org/documentation/1.2.4/jpa
+        Hibernate maintains a cache of Objects that have been queried from the database. These
+        Objects are referred to as persistent Objects as long as the EntityManager that was used to
+        fetch them is still active. That means that any changes to these Objects within the bounds of a
+        transaction are automatically persisted when the transaction is committed
+        */
+
+        // 1 - Get an entity/model from the DB using another Persistence Context in order to have an unedited entity/model
+        // TODO: Cast to the proper ClassModel containing the id
+        /*code.append("Class c = ").append(ctClass.getName()).append(".class;");
+        code.append(Field.class.getName()).append(" f = null;");
+        code.append("boolean exit = false;");
+        code.append("while (c != ").append(GenericModel.class.getName()).append(".class) {");
+        code.append(Field.class.getName()).append("[] fields = c.getDeclaredFields();");
+        code.append("for (int i=0; i<fields.length; i++) {");
+        code.append("f = fields[i];");
+        code.append(java.lang.annotation.Annotation.class.getName()).append(" a = f.getAnnotation(").append(javax.persistence.Id.class.getName()).append(".class);");
+        code.append("if (a != null) {");
+        code.append("play.Logger.debug(f.getName(), null);");
+        code.append("exit = true;");
+        code.append("break;");
+        code.append("}");   // end if
+        code.append("}");   // end for
+        code.append("if(exit){break;}");
+        code.append("c = c.getSuperclass();");
+        code.append("}");   // end while
+
+        code.append("play.Logger.debug(c.getName(), null);");
+        code.append("if (f != null){").append("play.Logger.debug(f.getName(), null);").append("}");
+*/
+
+        Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
+        CtClass c = modelField.getKey();
+        CtField f = modelField.getValue();
+        code.append("Long id = ((").append(c.getName()).append(")this).").append(f.getName()).append(";");
+
+        /*code.append("String theClass = c.getName();");*/
+        //code.append("Long id2 = ((c.getName()").append(")this).f.getLong()").append("id;");
+//        code.append("if (f != null) {");
+        //code.append("Long id2 = f.getLong((c.getName())").append(ctClass.getName()).append(");");
+        //code.append("Long id2 = f.getLong(").append(ctClass.getName()).append(");");
+//        org.apache.commons.beanutils.BeanUtils.getSimpleProperty(ctClass, f.getName());
+//        code.append("}");
+        //code.append("Long id2 = f.getLong(((play.db.jpa.Model)this).id);");
+
+////        code.append("Long id = ((").append(Model.class.getName()).append(")this).id;");
+        //code.append("javax.persistence.EntityManager em = play.db.jpa.JPA.newEntityManager();");
+        //code.append(ctClass.getName()).append(" model = ").append("em.find(").append(ctClass.getName()).append(".class, id);");
+        code.append(ctClass.getName()).append(" model = ").append("play.modules.recordtracking.RecordTracking.em.find(").append(ctClass.getName()).append(".class, id);");
+
         // 2 - model._fill_track_data();
+        code.append("((").append(ctClass.getName()).append(")model)._fill_track_data();");
+
         // 3 - Write into log
-//        code.append(ctClass.getName()).append(" model = (").append(ctClass.getName()).append(")").append("GenericModel.findById(((").append(Model.class.getName()).append(")this).id);");
-//        code.append("model._fill_track_data();");
+        code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(((").append(ctClass.getName()).append(")model).formatRecordTracking(\"PRE UPDATE\"));");
 
-//        String info = "_fill_track_data();";
-
-        code.append("Long id = ((").append(Model.class.getName()).append(")this).id;");
-        code.append(ctClass.getName()).append(" model = (").append(ctClass.getName()).append(")").append(ctClass.getName()).append(".findById(id);");
-        if (ctClass.getName().equals("models.Author")) {
-            code.append("play.Logger.debug(\"NAME: %s\", new String[]{model.first_name});");
-        }
-        code.append("model._fill_track_data();");
-        code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(model.formatRecordTracking(\"PRE UPDATE\"));");
 
         if (methodWithPreUpdateAnnot != null) {
-//            code.append(debug);
-//            code.append(info);
             methodWithPreUpdateAnnot.insertBefore(code.toString());
 		} else {
             String tmpCode = code.toString();
             code = new StringBuilder();
             code.append("public void onPreUpdate() { ");
-//            code.append(debug);
-//            code.append(info);
             code.append(tmpCode);
             code.append("}");
-
-            Logger.debug("PostUpdate code%n%s", code.toString());
 
             final CtMethod onPreUpdate = CtMethod.make(code.toString(), ctClass);
             ctClass.addMethod(onPreUpdate);
@@ -512,6 +556,8 @@ public class RecordTrackingEnhancer extends Enhancer {
 
             onPreUpdate.getMethodInfo().addAttribute(attr);
 		}
+
+        Logger.debug("PreUpdate code%n%s", code.toString());
     }
 
     private void createMethodOnPostUpdate() throws Exception {
@@ -546,5 +592,4 @@ public class RecordTrackingEnhancer extends Enhancer {
             onPostUpdate.getMethodInfo().addAttribute(attr);
 		}
     }
-
 }

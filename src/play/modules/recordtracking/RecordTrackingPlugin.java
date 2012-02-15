@@ -42,6 +42,16 @@ public class RecordTrackingPlugin extends PlayPlugin {
         RecordTrackingLogger.getInstance();
     }
 
+    @Override
+    public void onApplicationStart() {
+        new RecordTracking();   // For having an instance of EntityManager
+    }
+
+    @Override
+    public void onApplicationStop() {
+        RecordTracking.em.close();
+    }
+
 //    @Override
     public void onEvent_Tmp(String message, Object context) {
         // "JPASupport.objectPersisted"
