@@ -34,6 +34,4 @@ public class Quote extends GenericModel {
     @Required
     public String quotation;
 
-
-
 }
