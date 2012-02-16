@@ -10,6 +10,7 @@ import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
 import net.parnassoft.playutilities.EnhancerUtility;
+import net.parnassoft.playutilities.annotations.CastType;
 import play.Logger;
 import play.classloading.ApplicationClasses.ApplicationClass;
 import play.classloading.enhancers.Enhancer;
@@ -61,7 +62,7 @@ public class RecordTrackingEnhancer extends Enhancer {
         createMethodOnPreUpdate();
         createMethodOnPostUpdate();
 
-        Logger.debug("ENHANCED: %s", ctClass.getName());
+        Logger.debug("RECORD_TRACKING ENHANCED: %s", ctClass.getName());
 
 		// Done - Enhance Class.
 		appClass.enhancedByteCode = ctClass.toBytecode();
@@ -135,6 +136,8 @@ public class RecordTrackingEnhancer extends Enhancer {
      * @throws RecordTrackingException -
      */
     private void createFillTrackDataMethod() throws CannotCompileException, ClassNotFoundException, NotFoundException, RecordTrackingException {
+        //ctClass.getClassPool().importPackage("org.apache.commons.lang.StringUtils");
+
         StringBuilder code = new StringBuilder();
         code.append("public void _fill_track_data() {");
         code.append("track_data = new java.util.LinkedHashMap();");
@@ -160,22 +163,26 @@ public class RecordTrackingEnhancer extends Enhancer {
 
                         String modelClass;
                         String idField;
-                        //if (!RecordTrackingProps.allEntitiesInheritsFromModel) {
-                            if (EnhancerUtility.inheritsFromModel(ctField.getType())) {
-                                modelClass = GenericModel.class.getName(); // until stated otherwise
-                                idField = "id";
-                            } else {
-                                CtField field = ctClass.getField(String.format("%sCastType", ctField.getName()));
-                                if (field == null) {
-                                    String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
-                                    throw new RecordTrackingException(error);
-                                }
-                                CtClass castType = classPool.get(field.getType().getName());
-                                Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(castType);
+
+                        if (EnhancerUtility.inheritsFromModel(ctField.getType())) {
+                            modelClass = GenericModel.class.getName(); // until stated otherwise
+                            idField = "id";
+                        } else {
+                            CastType a = (CastType) EnhancerUtility.getAnnotation(ctField, CastType.class);
+                            if (a == null) {
+                                String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
+                                throw new RecordTrackingException(error);
+                            }
+                            CtClass castType = classPool.get(a.type().getName());
+                            Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(castType);
+                            if (modelWithId != null) {
                                 modelClass = modelWithId.getKey().getName();
                                 idField = modelWithId.getValue().getName();
+                            } else {
+                                throw new CannotCompileException("ALERT:, modelWithId not found");
                             }
-                        //}
+                        }
+
                         code.append("key = \"@").append(ctField.getName()).append("_ids\";");
                         code.append("StringBuilder valueSB = new StringBuilder();");
                         code.append("if (").append(ctField.getName()).append(" != null) {");
@@ -195,16 +202,19 @@ public class RecordTrackingEnhancer extends Enhancer {
 
                         String modelClass;
                         String idField;
-                        //if (!RecordTrackingProps.allEntitiesInheritsFromModel) {
-                            if (!EnhancerUtility.inheritsFromModel(ctField.getType())) {
-                                Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
+
+                        if (!EnhancerUtility.inheritsFromModel(ctField.getType())) {
+                            Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
+                            if (modelWithId != null) {
                                 modelClass = modelWithId.getKey().getName();
                                 idField = modelWithId.getValue().getName();
                             } else {
-                                modelClass = Model.class.getName();
-                                idField = "id";
+                                throw new CannotCompileException("WATCH OUT: modelWithId not found");
                             }
-                        //}
+                        } else {
+                            modelClass = Model.class.getName();
+                            idField = "id";
+                        }
 
                         code.append("key = \"@").append(ctField.getName()).append("_id\";");
                         code.append(modelClass).append(" model = (").append(modelClass).append(")this.").append(ctField.getName()).append(";");
@@ -246,17 +256,17 @@ public class RecordTrackingEnhancer extends Enhancer {
         }
 
         // Print track_data, Uncomment the block just for debugging proposes
-//        code.append("java.util.Iterator entries = track_data.entrySet().iterator();");
-//        code.append("while (entries.hasNext()) {");
-//        code.append("java.util.Map.Entry thisEntry = (java.util.Map.Entry) entries.next();");
-//        code.append("String key = (String) thisEntry.getKey();");
-//        code.append("String value = (String) thisEntry.getValue();");
-//        code.append("play.Logger.debug(\"%s:%s\", new String[]{key, value});");
-//        code.append("}");
+        /*code.append("java.util.Iterator entries = track_data.entrySet().iterator();");
+        code.append("while (entries.hasNext()) {");
+        code.append("java.util.Map.Entry thisEntry = (java.util.Map.Entry) entries.next();");
+        code.append("String key = (String) thisEntry.getKey();");
+        code.append("String value = (String) thisEntry.getValue();");
+        code.append("play.Logger.debug(\"%s:%s\", new String[]{key, value});");
+        code.append("}");*/
 
         code.append("}");   // end method
 
-        Logger.debug(code.toString());    // print the injected code
+//        Logger.debug(code.toString());    // print the injected code
 
         final CtMethod fillTrackData = CtMethod.make(code.toString(), ctClass);
         ctClass.addMethod(fillTrackData);
@@ -354,17 +364,16 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPrePersistAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PrePersist.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPrePersist\", new String[]{this.getClass().getName()});";
-        String info = ""; // Nothing to do
+        String statement = ""; // Nothing to do
 
         if (methodWithPrePersistAnnot != null) {
-//            code.append(debug);
-            code.append(info);
+            code.append("{");
+            code.append(statement);
+            code.append("}");
             methodWithPrePersistAnnot.insertBefore(code.toString());
 		} else {
             code.append("public void onPostPersist() { ");
-//            code.append(debug);
-            code.append(info);
+            code.append(statement);
             code.append("}");
 
 //            Logger.debug("PostPersist code%n%s", code.toString());
@@ -387,17 +396,16 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPostPersistAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PostPersist.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPostPersist\", new String[]{this.getClass().getName()});";
-        String info = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST PERSIST\"));";
+        String statement = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST PERSIST\"));";
 
         if (methodWithPostPersistAnnot != null) {
-//            code.append(debug);
-            code.append(info);
+            code.append("{");
+            code.append(statement);
+            code.append("}");
             methodWithPostPersistAnnot.insertBefore(code.toString());
 		} else {
             code.append("public void onPostPersist() { ");
-//            code.append(debug);
-            code.append(info);
+            code.append(statement);
             code.append("}");
 
 //            Logger.debug("PostPersist code%n%s", code.toString());
@@ -420,17 +428,16 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPreRemoveAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PreRemove.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPreRemove\", new String[]{this.getClass().getName()});";
-        String info = "_fill_track_data();";
+        String statement = "_fill_track_data();";
 
         if (methodWithPreRemoveAnnot != null) {
-//            code.append(debug);
-            code.append(info);
+            code.append("{");
+            code.append(statement);
+            code.append("}");
             methodWithPreRemoveAnnot.insertBefore(code.toString());
 		} else {
             code.append("public void onPreRemove() { ");
-//            code.append(debug);
-            code.append(info);
+            code.append(statement);
             code.append("}");
 
 //            Logger.debug("PostRemove code%n%s", code.toString());
@@ -453,17 +460,16 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPostRemoveAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PostRemove.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPostRemove\", new String[]{this.getClass().getName()});";
-        String info = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST REMOVE\"));";
+        String statement = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST REMOVE\"));";
 
         if (methodWithPostRemoveAnnot != null) {
-//            code.append(debug);
-            code.append(info);
+            code.append("{");
+            code.append(statement);
+            code.append("}");
             methodWithPostRemoveAnnot.insertBefore(code.toString());
 		} else {
             code.append("public void onPostRemove() { ");
-//            code.append(debug);
-            code.append(info);
+            code.append(statement);
             code.append("}");
 
 //            Logger.debug("PostRemove code%n%s", code.toString());
@@ -486,7 +492,6 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPreUpdateAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PreUpdate.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPreUpdate\", new String[]{this.getClass().getName()});";
 
         /*
         EXPLICIT SAVE (taken from http://www.playframework.org/documentation/1.2.4/jpa
@@ -504,16 +509,20 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         // 1 - Get an entity/model from the DB using another Persistence Context in order to have an unedited entity/model
         code.append(ctClass.getName()).append(" model = ").append("play.modules.recordtracking.RecordTracking.em.find(").append(ctClass.getName()).append(".class, id);");
+        //code.append("$class model = ").append("play.modules.recordtracking.RecordTracking.em.find($class.class, id);");
 
         // 2 - model._fill_track_data();
         code.append("((").append(ctClass.getName()).append(")model)._fill_track_data();");
+        //code.append("(($class)model)._fill_track_data();");
 
         // 3 - Write into log
         code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(((").append(ctClass.getName()).append(")model).formatRecordTracking(\"PRE UPDATE\"));");
+        //code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info((($class)model).formatRecordTracking(\"PRE UPDATE\"));");
 
 
         if (methodWithPreUpdateAnnot != null) {
-            methodWithPreUpdateAnnot.insertBefore(code.toString());
+            String block = String.format("{%s}", code.toString());
+            methodWithPreUpdateAnnot.insertBefore(block);
 		} else {
             String tmpCode = code.toString();
             code = new StringBuilder();
@@ -531,7 +540,7 @@ public class RecordTrackingEnhancer extends Enhancer {
             onPreUpdate.getMethodInfo().addAttribute(attr);
 		}
 
-        Logger.debug("PreUpdate code%n%s", code.toString());
+//        Logger.debug("PreUpdate code%n%s", code.toString());
     }
 
     private void createMethodOnPostUpdate() throws Exception {
@@ -541,17 +550,16 @@ public class RecordTrackingEnhancer extends Enhancer {
 		CtMethod methodWithPostUpdateAnnot = EnhancerUtility.getMethodAnnotatedWith(ctClass, PostUpdate.class.getName());
 
         StringBuilder code = new StringBuilder();
-//        String debug = "play.Logger.debug(\"SCOPE -> %s.onPostUpdate\", new String[]{this.getClass().getName()});";
-        String info = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST UPDATE\"));";
+        String statement = "_fill_track_data(); play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(formatRecordTracking(\"POST UPDATE\"));";
 
         if (methodWithPostUpdateAnnot != null) {
-//            code.append(debug);
-            code.append(info);
+            code.append("{");
+            code.append(statement);
+            code.append("{");
             methodWithPostUpdateAnnot.insertBefore(code.toString());
 		} else {
             code.append("public void onPostUpdate() { ");
-//            code.append(debug);
-            code.append(info);
+            code.append(statement);
             code.append("}");
 
 //            Logger.debug("PostUpdate code%n%s", code.toString());

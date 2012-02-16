@@ -15,15 +15,9 @@ public class RecordTrackingProps {
 //    static String loggerConf = null;
 
     static String sessionKey = null;
-    static boolean allEntitiesInheritsFromModel = true;
 
     public static String getSessionKey() {
         return sessionKey;
     }
-
-    public boolean doesAllEntitiesInheritsFromModel() {
-        return allEntitiesInheritsFromModel;
-    }
-
 
 }

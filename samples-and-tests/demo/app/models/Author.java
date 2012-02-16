@@ -24,4 +24,6 @@ public class Author extends AuthorAbs {
 //    public String formatRecordTracking(String event) {
 //        return "\n" + "YOU WILL KNOW NOTHING FROM ME, :p!!!" + "\n";
 //    }
+
+
 }

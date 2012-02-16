@@ -37,7 +37,6 @@ public class RecordTrackingPlugin extends PlayPlugin {
         }
 
 //        RecordTrackingProps.loggerConf = Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "loggerConf", RecordTrackingProps.DEFAULT_XML_CONF_LOGGER_PATH); // "recordtracking.xml"
-        RecordTrackingProps.allEntitiesInheritsFromModel = Boolean.parseBoolean(Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "allEntitiesInheritsFromModel", "true"));
         RecordTrackingProps.sessionKey = Play.configuration.getProperty(RecordTrackingProps.CONFIG_PREFIX + "sessionKey", "username"); //maybe email
         RecordTrackingLogger.getInstance();
     }
