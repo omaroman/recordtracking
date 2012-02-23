@@ -172,7 +172,13 @@ public class RecordTrackingEnhancer extends Enhancer {
                             throw new RecordTrackingException(error);
                         }
 
-                        CtClass type = classPool.get(cast.type().getName());
+                        CtClass type;
+                        try {
+                            type = classPool.get(cast.type().getName());
+                        } catch (NotFoundException e) {
+                            String error = String.format("%s not found in class pool", cast.type().getName());
+                            throw new CannotCompileException(error);
+                        }
                         String modelClass;
                         String idField;
                         String table;
