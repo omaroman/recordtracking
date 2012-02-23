@@ -4,10 +4,8 @@ require:
     - play
     - play -> crud
     - play -> secure
-#    - play -> recordtracking 0.1
 
     - recordtracking -> recordtracking
-#    - oracle -> oracle
 
 #    - net.parnassoft -> utilities 0.2:
 #        transitive: false
@@ -18,7 +16,6 @@ repositories:
         artifact:   ${application.path}/../../../[module]
         contains:
             - recordtracking -> *
-            - oracle -> *
 
 #    - parnassoft:
 #            type:       http

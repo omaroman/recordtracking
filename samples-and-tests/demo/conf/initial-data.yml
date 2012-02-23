@@ -9,5 +9,20 @@ Quote(q1):
     author:         a1
     quotation:      "A darle átomos..."
 
+Author(a2):
+    age:            50
+    first_name:     Joker
+    last_name:      Clown
 
+Quote(q2):
+    author:         a2
+    quotation:      "Why so serious?"
+
+Quote(q3):
+    author:         a2
+    quotation:      "Killing joke"
+
+Quote(q4):
+    author:         a2
+    quotation:      "Mad love"
 

@@ -15,19 +15,23 @@ import play.db.jpa.Model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @MappedSuperclass
 public abstract class AuthorAbs extends GenericModel {
 
     // REVERSE ASSOCIATIONS
 
-    /*@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
     @Cast(type = Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
-    public List<Quote> quotes; // = new ArrayList<Quote>(); // has_many :quotes*/
+    public Set<Quote> quotes; // has_many :quotes
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
+    /*@OneToOne(mappedBy = "author", cascade = CascadeType.ALL) // name of the variable in the other object that references this object
+    public Quote quote;*/
+
+    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
     @Cast(type = Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
-    public List<Quote> quotes; // = new ArrayList<Quote>(); // has_many :quotes
+    public List<Quote> quotes; // has_many :quotes*/
 
 //    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
 //    public Quote quote;
@@ -37,10 +41,6 @@ public abstract class AuthorAbs extends GenericModel {
     @Id
     @GeneratedValue
     public Long pk;
-    //@Id public Long pk;
-    // NOTE (Oracle Module): If @Id field is not named id, then write the following accessor methods
-    //public Long getId() {return pk;}
-    //public void setId(Long id) {pk = id;}
 
     @Required
     @Unique

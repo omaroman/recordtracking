@@ -1,20 +1,18 @@
 /**
  * Author: OMAROMAN
- * Date: 11/4/11
- * Time: 11:53 AM
+ * Date: 2/23/12
+ * Time: 3:31 PM
  */
+
 package models;
 
 import play.data.validation.Required;
 import play.db.jpa.GenericModel;
-import play.db.jpa.Model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "quotes")
-//@NoTracking
-public class Quote extends GenericModel {
+//@MappedSuperclass
+public class QuoteAbs /*extends GenericModel*/ {
 
     // Associations
 
