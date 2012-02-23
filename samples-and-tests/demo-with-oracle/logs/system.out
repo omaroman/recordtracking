@@ -1,0 +1,52 @@
+Listening for transport dt_socket at address: 8000
+11:35:33,638 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
+11:35:33,653 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:35:33,656 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:35:33,656 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:35:33,657 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:35:34,798 WARN  ~ You're running Play! in DEV mode
+~
+~ Go to http://localhost:9000/@tests to run the tests
+~
+11:35:34,959 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:35:39,419 DEBUG ~ public void _fill_track_data() {track_data = new java.util.LinkedHashMap();String key = null;String value = null;key = "@author_id";models.AuthorAbs model = (models.AuthorAbs)this.author;if (model == null || ((models.AuthorAbs)model).id == null) {value = "null";} else {value = ((models.AuthorAbs)model).id.toString();}track_data.put(key, value);if (((models.Quote)this).quotation == null) {value = "null";} else {value = ((models.Quote)this).quotation.toString();}key = "@quotation";track_data.put(key, value);}
+11:35:39,424 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:35:39,581 DEBUG ~ PreUpdate code
+public void onPreUpdate() { Long id = ((models.Quote)this).id;models.Quote model = play.modules.recordtracking.RecordTracking.em.find(models.Quote.class, id);((models.Quote)model)._fill_track_data();play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(((models.Quote)model).formatRecordTracking("PRE UPDATE"));}
+11:35:39,587 DEBUG ~ ENHANCED: models.Quote
+11:35:40,445 DEBUG ~ public void _fill_track_data() {track_data = new java.util.LinkedHashMap();String key = null;String value = null;key = "@quotes_ids";StringBuilder valueSB = new StringBuilder();if (quotes != null) {for (java.util.Iterator i =quotes.iterator(); i.hasNext(); ) {models.Quote model = (models.Quote) i.next();if (model == null || ((models.Quote)model).id == null) {valueSB.append("null").append(' ');} else {valueSB.append(((models.Quote)model).id).append(' ');}}} else {valueSB.append("null");}track_data.put(key, valueSB.toString());if (((models.AuthorAbs)this).first_name == null) {value = "null";} else {value = ((models.AuthorAbs)this).first_name.toString();}key = "@first_name";track_data.put(key, value);if (((models.AuthorAbs)this).last_name == null) {value = "null";} else {value = ((models.AuthorAbs)this).last_name.toString();}key = "@last_name";track_data.put(key, value);value = org.apache.commons.lang.StringUtils.repeat("*", new java.lang.Integer(age).toString().length());key = "@age";track_data.put(key, value);}
+11:35:40,488 DEBUG ~ Creating formatRecordTracking method for models.Author
+11:35:40,516 DEBUG ~ PreUpdate code
+public void onPreUpdate() { Long id = ((models.AuthorAbs)this).id;models.Author model = play.modules.recordtracking.RecordTracking.em.find(models.Author.class, id);((models.Author)model)._fill_track_data();play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(((models.Author)model).formatRecordTracking("PRE UPDATE"));}
+11:35:40,519 DEBUG ~ ENHANCED: models.Author
+11:35:44,406 INFO  ~ Connected to jdbc:h2:mem:play;MODE=MYSQL;LOCK_MODE=0
+11:35:45,594 ERROR ~ 
+
+@69dceag1o
+Internal Server Error (500) for request GET /@tests.list
+
+JPA error
+A JPA error occurred (Unable to build EntityManagerFactory): No identifier specified for entity: models.Quote
+
+play.exceptions.JPAException: Unable to build EntityManagerFactory
+	at play.db.jpa.JPAPlugin.onApplicationStart(JPAPlugin.java:242)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:480)
+	at play.Play.start(Play.java:515)
+	at play.Play.detectChanges(Play.java:629)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: org.hibernate.AnnotationException: No identifier specified for entity: models.Quote
+	at org.hibernate.cfg.InheritanceState.determineDefaultAccessType(InheritanceState.java:268)
+	at org.hibernate.cfg.InheritanceState.getElementsToProcess(InheritanceState.java:223)
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:686)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processAnnotatedClassesQueue(Configuration.java:3977)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processMetadata(Configuration.java:3931)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1368)
+	at org.hibernate.cfg.Configuration.buildMappings(Configuration.java:1345)
+	at org.hibernate.ejb.Ejb3Configuration.buildMappings(Ejb3Configuration.java:1477)
+	at org.hibernate.ejb.EventListenerConfigurator.configure(EventListenerConfigurator.java:193)
+	at org.hibernate.ejb.Ejb3Configuration.configure(Ejb3Configuration.java:1096)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:900)
+	at play.db.jpa.JPAPlugin.onApplicationStart(JPAPlugin.java:240)
+	... 5 more
+@KILLED

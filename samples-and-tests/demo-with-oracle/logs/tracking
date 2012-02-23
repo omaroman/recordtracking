@@ -1,0 +1,26 @@
+======================[2012-02-17 10:52:10,339]======================
+-----[BEGIN]-----
+POST PERSIST
+Fri Feb 17 10:52:10 CST 2012
+User: _YAML_
+
+<models.Author>
+@quotes_ids:null
+@pk:1
+@first_name:Hombre
+@last_name:Radioactivo
+@age:**
+-----[ END ]-----
+
+======================[2012-02-17 10:52:10,393]======================
+-----[BEGIN]-----
+POST PERSIST
+Fri Feb 17 10:52:10 CST 2012
+User: _YAML_
+
+<models.Quote>
+@author_id:1
+@id:1
+@quotation:A darle átomos...
+-----[ END ]-----
+

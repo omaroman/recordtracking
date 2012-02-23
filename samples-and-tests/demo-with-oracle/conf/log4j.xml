@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="Console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+		    <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p ~ %m%n" />
+		</layout>
+    </appender>
+
+    <appender name="Play" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/application"/>
+        <param name="DatePattern" value="'-'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+		    <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p ~ %m%n" />
+		</layout>
+    </appender>
+
+    <appender name="RecordTracking" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/tracking"/>
+        <param name="DatePattern" value="'-'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+		    <param name="ConversionPattern" value="======================[%d{ISO8601}]======================%n%m%n" />
+		</layout>
+    </appender>
+
+    <logger name="play">
+        <level value="DEBUG" />
+        <appender-ref ref="Play" />
+    </logger>
+
+    <logger name="recordtracking">
+        <level value="INFO" />
+        <appender-ref ref="RecordTracking" />
+        <!--<appender-ref ref="Console" />-->
+    </logger>
+
+    <root>
+        <level value="ERROR" />
+        <appender-ref ref="Console" />
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,13 @@
+# Initial Data
+
+Author(a1):
+    age:            30
+    first_name:     Hombre
+    last_name:      Radioactivo
+
+Quote(q1):
+    author:         a1
+    quotation:      "A darle átomos..."
+
+
+

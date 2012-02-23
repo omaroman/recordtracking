@@ -1,0 +1,22 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+
+layout.header.left.title=RecordTracking
+layout.header.motto=Finally a Java framework made by Web developers. Discover a clean alternative to bloated enterprise Java stacks. Play focuses on developer productivity and targets RESTful architectures.
+
+layout.footer.about.header=About
+layout.footer.about.message=RecordTracking module demo app for the Play! framework
+layout.footer.contact.header=Contact
+layout.footer.contact.message=Developer, Designer & Photographer
+layout.footer.contact.email=omaroman@gmail.com
+
+global.form.msg.error=Can you fix please?
+
+# Models
+author.first_name=First name
+author.last_name=Last name
+author.age=Age
+
+# Views
+views.author.success.msg=Author added successfully!

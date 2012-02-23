@@ -10,7 +10,9 @@ import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
 import net.parnassoft.playutilities.EnhancerUtility;
-import net.parnassoft.playutilities.annotations.CastType;
+import net.parnassoft.playutilities.annotations.Cast;
+import net.parnassoft.playutilities.enums.Relationship;
+import net.parnassoft.playutilities.exceptions.ForeignKeyException;
 import play.Logger;
 import play.classloading.ApplicationClasses.ApplicationClass;
 import play.classloading.enhancers.Enhancer;
@@ -28,11 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
-import java.beans.XMLEncoder;
-import java.beans.XMLDecoder;
 
 public class RecordTrackingEnhancer extends Enhancer {
 
@@ -134,8 +131,10 @@ public class RecordTrackingEnhancer extends Enhancer {
      * @throws ClassNotFoundException -
      * @throws NotFoundException -
      * @throws RecordTrackingException -
+     * @throws NoSuchFieldException -
+     * @throws ForeignKeyException -
      */
-    private void createFillTrackDataMethod() throws CannotCompileException, ClassNotFoundException, NotFoundException, RecordTrackingException {
+    private void createFillTrackDataMethod() throws ClassNotFoundException, NotFoundException, RecordTrackingException, CannotCompileException, NoSuchFieldException, ForeignKeyException {
         //ctClass.getClassPool().importPackage("org.apache.commons.lang.StringUtils");
 
         StringBuilder code = new StringBuilder();
@@ -154,36 +153,74 @@ public class RecordTrackingEnhancer extends Enhancer {
                 if (EnhancerUtility.isRelationship(ctField)) {
                     if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {
                         // one-to-many (@OneToMany) or many-to-one (@ManyToOne) or many-to-many (@ManyToMany) association - A Collection (Set or List)
-                        // Just get the id of every single object in the collection
+                        // Get all "primary key fields" from unknown children by using a native Query in order to skip the loading of a collection of objects
 
                         // NOTE:
                         // Java implements generics with type erasure. The compiler uses this type information only for
                         // safety checks, the byte code doesn't contain any information about generic types.
                         // Consequently, the runtime doesn't know about it either, so you cannot retrieve it by reflection.
 
-                        String modelClass;
-                        String idField;
-
-                        if (EnhancerUtility.inheritsFromModel(ctField.getType())) {
-                            modelClass = GenericModel.class.getName(); // until stated otherwise
-                            idField = "id";
-                        } else {
-                            CastType a = (CastType) EnhancerUtility.getAnnotation(ctField, CastType.class);
-                            if (a == null) {
-                                String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
-                                throw new RecordTrackingException(error);
-                            }
-                            CtClass castType = classPool.get(a.type().getName());
-                            Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(castType);
-                            if (modelWithId != null) {
-                                modelClass = modelWithId.getKey().getName();
-                                idField = modelWithId.getValue().getName();
-                            } else {
-                                throw new CannotCompileException("ALERT:, modelWithId not found");
-                            }
+                        Cast cast = (Cast) EnhancerUtility.getAnnotation(ctField, Cast.class);
+                        if (cast == null) {
+                            String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
+                            throw new RecordTrackingException(error);
                         }
 
-                        code.append("key = \"@").append(ctField.getName()).append("_ids\";");
+                        CtClass type = classPool.get(cast.type().getName());
+                        String modelClass;
+                        String idField;
+                        String table;
+
+                        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(type);
+                        if (modelWithId != null) {
+                            modelClass = modelWithId.getKey().getName();
+                            idField = modelWithId.getValue().getName();
+                            if (modelClass.equals(Model.class.getName())) {
+                                table = EnhancerUtility.getTableName(type);
+                            } else {
+                                table = EnhancerUtility.getTableName(modelWithId.getKey());
+                            }
+                        } else {
+                            throw new CannotCompileException("ALERT:, modelWithId not found");
+                        }
+
+                        if (EnhancerUtility.isInverseRelationship(ctField)) {
+                            // NOTE: This only works for INVERSE associations
+                            String fk = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // refEntity & refField
+                            Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
+                            CtClass model = modelField.getKey();
+                            CtField pk = modelField.getValue();
+
+                            code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(pk.getName()).append(";");
+                            code.append("StringBuilder query = new StringBuilder();");
+                            code.append("query.append(\"SELECT \");");
+                            code.append("query.append(\"").append(idField).append("\");");
+                            code.append("query.append(\" FROM \");");
+                            code.append("query.append(\"").append(table).append("\");");
+                            code.append("query.append(\" WHERE \");");
+                            code.append("query.append(\"").append(fk).append("\");");
+                            code.append("query.append(\" = \");");
+                            code.append("query.append(fkValue);");
+                            //code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
+                            code.append("StringBuilder valueSB = new StringBuilder();");
+                            code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
+                            code.append("if (rs.next()) {");
+                            code.append("while (rs.next()) {");
+                            code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
+                            code.append("key = \"@").append(ctField.getName()).append("_").append(fk).append("'s\";");
+                            code.append("valueSB.append(_id.toString()").append(").append(' ');");
+                            code.append("}"); // end while block
+                            code.append("} else {");
+                            code.append("valueSB.append(\"null\");");
+                            code.append("}");   // end if block
+                            code.append("track_data.put(key, valueSB.toString());");
+                        } else { // Normal Relationship
+                            // TODO: Get the union table name
+
+                            // TODO: Get the primary key from refEntity & refField
+                        }
+
+                        /*code.append("key = \"@").append(ctField.getName()).append("_ids\";");
                         code.append("StringBuilder valueSB = new StringBuilder();");
                         code.append("if (").append(ctField.getName()).append(" != null) {");
                         code.append("for (java.util.Iterator i =").append(ctField.getName()).append(".iterator(); i.hasNext(); ) {");
@@ -197,26 +234,59 @@ public class RecordTrackingEnhancer extends Enhancer {
                         code.append("} else {");
                         code.append("valueSB.append(\"null\");");
                         code.append("}");   // end if
-                        code.append("track_data.put(key, valueSB.toString());");
+                        code.append("track_data.put(key, valueSB.toString());");*/
                     } else {    // one-to-one association (@OneToOne)
 
+                        CtClass type = ctField.getType();
                         String modelClass;
                         String idField;
+                        //String table;
 
-                        if (!EnhancerUtility.inheritsFromModel(ctField.getType())) {
-                            Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
-                            if (modelWithId != null) {
-                                modelClass = modelWithId.getKey().getName();
-                                idField = modelWithId.getValue().getName();
-                            } else {
-                                throw new CannotCompileException("WATCH OUT: modelWithId not found");
-                            }
+                        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
+                        if (modelWithId != null) {
+                            modelClass = modelWithId.getKey().getName();
+                            idField = modelWithId.getValue().getName();
+                            //table = getTableName(type); // The model annotated with @Entity
                         } else {
-                            modelClass = Model.class.getName();
-                            idField = "id";
+                            throw new CannotCompileException("WATCH OUT: modelWithId not found");
                         }
 
-                        code.append("key = \"@").append(ctField.getName()).append("_id\";");
+
+                        /*// TODO: I guess this works only for NORMAL associations
+                        //String fk = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // refClass & refField
+                        String fk = EnhancerUtility.getRelationshipKeyFieldName(Relationship.NORMAL, ctClass, type); // refClass & refField
+                        Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
+                        CtClass model = modelField.getKey();
+                        CtField pk = modelField.getValue();
+
+                        //code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(pk.getName()).append(";");
+                        code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(fk).append(";");
+                        code.append("StringBuilder query = new StringBuilder();");
+                        code.append("query.append(\"SELECT \");");
+                        code.append("query.append(\"").append(idField).append("\");");
+                        code.append("query.append(\" FROM \");");
+                        code.append("query.append(\"").append(table).append("\");");
+                        code.append("query.append(\" WHERE \");");
+                        //code.append("query.append(\"").append(fk).append("\");");
+                        code.append("query.append(\"").append(pk).append("\");");
+                        code.append("query.append(\" = \");");
+                        code.append("query.append(fkValue);");
+                        code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
+                        code.append("StringBuilder valueSB = new StringBuilder();");
+                        code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
+                        code.append("key = \"@").append(ctField.getName()).append("_").append(fk).append("\";");
+                        code.append("if (rs.next()) {");
+                        code.append("while (rs.next()) {");
+                        code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
+                        code.append("value = _id.toString();");
+                        code.append("}"); // end while block
+                        code.append("} else {");
+                        code.append("value = \"null\";");
+                        code.append("}");   // end if block
+                        code.append("track_data.put(key, valueSB.toString());");*/
+
+                        // NOTE: No nativeQuery needed when is not a collection
+
                         code.append(modelClass).append(" model = (").append(modelClass).append(")this.").append(ctField.getName()).append(";");
                         code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
                         code.append("value = \"null\";");
@@ -509,15 +579,12 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         // 1 - Get an entity/model from the DB using another Persistence Context in order to have an unedited entity/model
         code.append(ctClass.getName()).append(" model = ").append("play.modules.recordtracking.RecordTracking.em.find(").append(ctClass.getName()).append(".class, id);");
-        //code.append("$class model = ").append("play.modules.recordtracking.RecordTracking.em.find($class.class, id);");
 
         // 2 - model._fill_track_data();
         code.append("((").append(ctClass.getName()).append(")model)._fill_track_data();");
-        //code.append("(($class)model)._fill_track_data();");
 
         // 3 - Write into log
         code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info(((").append(ctClass.getName()).append(")model).formatRecordTracking(\"PRE UPDATE\"));");
-        //code.append("play.modules.recordtracking.RecordTrackingLogger.getInstance().getLogger().info((($class)model).formatRecordTracking(\"PRE UPDATE\"));");
 
 
         if (methodWithPreUpdateAnnot != null) {

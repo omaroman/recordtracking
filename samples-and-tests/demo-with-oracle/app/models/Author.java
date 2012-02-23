@@ -25,8 +25,5 @@ public class Author extends AuthorAbs {
 //        return "\n" + "YOU WILL KNOW NOTHING FROM ME, :p!!!" + "\n";
 //    }
 
-    /*@Id public Long pk;
-    // NOTE: If @Id field is not named id, then write the following accessor methods
-    public Long getId() {return pk;}
-    public void setId(Long id) {pk = id;}*/
+
 }
