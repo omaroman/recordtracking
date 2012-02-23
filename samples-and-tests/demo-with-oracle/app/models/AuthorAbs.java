@@ -6,34 +6,29 @@
 
 package models;
 
-import net.parnassoft.playutilities.annotations.CastType;
+import net.parnassoft.playutilities.annotations.Cast;
 import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
-//import models.oracle.OracleModel;
 
 import javax.persistence.*;
 import java.util.List;
 
 @MappedSuperclass
-//public abstract class AuthorAbs extends OracleModel {
 public abstract class AuthorAbs extends GenericModel {
 
     // REVERSE ASSOCIATIONS
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
-    @CastType(type = Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
-    public List<Quote> quotes; // = new ArrayList<Quote>(); // has_many :quotes
+    @Cast(type = Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
+    public List<Quote> quotes; // has_many :quotes
 
 //    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
 //    public Quote quote;
 
     // FIELDS
 
-    /*@Id
-    @GeneratedValue
-    public Long pk;*/
     @Id public Long pk;
     // NOTE: If @Id field is not named id, then write the following accessor methods
     public Long getId() {return pk;}

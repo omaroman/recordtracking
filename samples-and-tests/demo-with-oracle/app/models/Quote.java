@@ -14,13 +14,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "quotes")
 //@NoTracking
-//public class Quote extends OracleModel {
 public class Quote extends GenericModel {
 
     // Associations
 
     @ManyToOne() // Optional, targetEntity for indicating where's the relationship
-    //@JoinColumn(name = "author_pk") // name of the FK field in this table
     @JoinColumn(name = "author_id") // name of the FK field in this table
     // --
     @Required
@@ -29,9 +27,6 @@ public class Quote extends GenericModel {
 
     // Fields
 
-    /*@Id
-    @GeneratedValue
-    public Long pk;*/
     @Id public Long id;
 
     @Required

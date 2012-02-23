@@ -82,6 +82,12 @@ public class RecordTrackingEnhancer extends Enhancer {
             return false;
         }
 
+        // Skip enhance model classes if doesn't have a field annotated with @Id
+        if (!EnhancerUtility.hasModelFieldAnnotatedWithIdWithinInheritance(ctClass)) {
+            play.Logger.warn("WARNING: there is NO fields annotated with @Id");
+            return false;
+        }
+
         // Do enhance this class
         return true;
     }
@@ -181,7 +187,7 @@ public class RecordTrackingEnhancer extends Enhancer {
                                 table = EnhancerUtility.getTableName(modelWithId.getKey());
                             }
                         } else {
-                            throw new CannotCompileException("ALERT:, modelWithId not found");
+                            throw new CannotCompileException("ALERT: modelWithId not found");
                         }
 
                         if (EnhancerUtility.isInverseRelationship(ctField)) {

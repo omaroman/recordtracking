@@ -1,36 +1,19 @@
-10:05:41,389 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:05:41,401 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:05:41,415 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:05:41,417 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:05:41,418 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:05:42,348 WARN  ~ You're running Play! in DEV mode
-10:05:42,540 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:05:48,627 DEBUG ~ ORACLE ENHANCED: models.oracle.OracleModel
-10:05:48,936 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:05:48,979 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:05:49,025 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:05:49,055 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:05:49,247 DEBUG ~ ORACLE ENHANCED: models.Author
-10:05:49,328 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:05:49,354 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:05:53,335 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:05:55,488 INFO  ~ Application 'demo' is now started !
-10:11:53,665 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:11:53,671 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:11:53,672 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:11:53,675 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:11:53,676 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:11:54,505 WARN  ~ You're running Play! in DEV mode
-10:11:54,650 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:12:13,813 ERROR ~ 
+10:59:11,925 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+10:59:11,930 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+10:59:11,931 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+10:59:11,932 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+10:59:11,935 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+10:59:13,118 WARN  ~ You're running Play! in DEV mode
+10:59:13,316 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+10:59:27,626 ERROR ~ 
 
-@69djad2nb
-Internal Server Error (500) for request GET /crud
+@69fb7309n
+Internal Server Error (500) for request GET /crud/
 
-Compilation error (In /app/models/Quote.java around line 18)
-The file /app/models/Quote.java could not be compiled. Error raised is : OracleModel cannot be resolved to a type
+Compilation error (In /app/models/AuthorAbs.java around line 9)
+The file /app/models/AuthorAbs.java could not be compiled. Error raised is : net.parnassoft.playutilities.annotations.CastType cannot be resolved
 
-play.exceptions.CompilationException: OracleModel cannot be resolved to a type
+play.exceptions.CompilationException: net.parnassoft.playutilities.annotations.CastType cannot be resolved
 	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
 	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
 	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
@@ -55,15 +38,15 @@ play.exceptions.CompilationException: OracleModel cannot be resolved to a type
 	at play.mvc.Router.load(Router.java:48)
 	at play.mvc.Router.detectChanges(Router.java:219)
 	at Invocation.HTTP Request(Play!)
-10:12:13,936 ERROR ~ 
+10:59:27,777 ERROR ~ 
 
-@69djad2nf
+@69fb730a1
 Internal Server Error (500) for request GET /favicon.ico
 
-Compilation error (In /app/models/Quote.java around line 18)
-The file /app/models/Quote.java could not be compiled. Error raised is : OracleModel cannot be resolved to a type
+Compilation error (In /app/models/AuthorAbs.java around line 9)
+The file /app/models/AuthorAbs.java could not be compiled. Error raised is : net.parnassoft.playutilities.annotations.CastType cannot be resolved
 
-play.exceptions.CompilationException: OracleModel cannot be resolved to a type
+play.exceptions.CompilationException: net.parnassoft.playutilities.annotations.CastType cannot be resolved
 	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
 	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
 	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
@@ -88,91 +71,112 @@ play.exceptions.CompilationException: OracleModel cannot be resolved to a type
 	at play.mvc.Router.load(Router.java:48)
 	at play.mvc.Router.detectChanges(Router.java:219)
 	at Invocation.HTTP Request(Play!)
-10:13:20,747 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:13:20,753 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:13:20,754 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:13:20,762 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:13:20,762 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:13:21,586 WARN  ~ You're running Play! in DEV mode
-10:13:21,725 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:13:32,427 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:13:32,458 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:13:32,494 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:13:32,526 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:13:32,676 DEBUG ~ ORACLE ENHANCED: models.Author
-10:13:32,825 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:13:32,845 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:13:36,475 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:13:38,049 INFO  ~ Application 'demo' is now started !
-10:26:58,678 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:26:58,684 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:26:58,684 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:26:58,687 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:26:58,688 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:26:59,518 WARN  ~ You're running Play! in DEV mode
-10:26:59,641 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:27:15,502 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:27:15,538 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:27:15,576 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:27:15,607 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:27:15,801 DEBUG ~ ORACLE ENHANCED: models.Author
-10:27:15,929 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:27:15,960 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:27:19,565 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:27:21,561 INFO  ~ Application 'demo' is now started !
-10:27:54,273 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:27:54,279 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:27:54,280 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:27:54,283 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:27:54,285 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:27:55,112 WARN  ~ You're running Play! in DEV mode
-10:27:55,243 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:28:06,244 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:28:06,275 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:28:06,319 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:28:06,350 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:28:06,502 DEBUG ~ ORACLE ENHANCED: models.Author
-10:28:06,619 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:28:06,649 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:28:09,949 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:28:12,017 INFO  ~ Application 'demo' is now started !
-10:33:19,445 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:33:19,501 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:33:19,502 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:33:19,503 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:33:19,503 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:33:20,390 WARN  ~ You're running Play! in DEV mode
-10:33:20,529 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:33:28,509 DEBUG ~ willBeSaved
-10:33:28,510 DEBUG ~ avoidCascadeSaveLoops
-10:33:28,510 DEBUG ~ quotes
-10:33:28,584 DEBUG ~ willBeSaved
-10:33:28,584 DEBUG ~ avoidCascadeSaveLoops
-10:33:28,584 DEBUG ~ quotes
-10:33:28,965 DEBUG ~ willBeSaved
-10:33:28,965 DEBUG ~ avoidCascadeSaveLoops
-10:33:28,965 DEBUG ~ quotes
-10:33:29,189 DEBUG ~ willBeSaved
-10:33:29,190 DEBUG ~ avoidCascadeSaveLoops
-10:33:29,190 DEBUG ~ quotes
-10:33:29,315 DEBUG ~ willBeSaved
-10:33:29,315 DEBUG ~ avoidCascadeSaveLoops
-10:33:29,315 DEBUG ~ quotes
-10:33:29,491 DEBUG ~ willBeSaved
-10:33:29,491 DEBUG ~ avoidCascadeSaveLoops
-10:33:29,491 DEBUG ~ quotes
-10:33:29,637 DEBUG ~ willBeSaved
-10:33:29,637 DEBUG ~ avoidCascadeSaveLoops
-10:33:29,637 DEBUG ~ quotes
-10:33:30,090 ERROR ~ 
+11:00:29,942 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:00:29,949 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:00:29,950 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:00:29,951 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:00:29,952 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:00:30,916 WARN  ~ You're running Play! in DEV mode
+11:00:31,065 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:00:46,592 ERROR ~ 
 
-@69djd7lcm
-Internal Server Error (500) for request GET /
+@69fb77e62
+Internal Server Error (500) for request GET /crud/
 
-Oops: ClassCastException
-An unexpected error occured caused by exception ClassCastException: $Proxy6 cannot be cast to javassist.bytecode.annotation.Annotation
+Compilation error (In /app/models/AuthorAbs.java around line 10)
+The file /app/models/AuthorAbs.java could not be compiled. Error raised is : net.parnassoft.playutilities.annotations.CastType cannot be resolved
 
-play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePlugin@359b46dc on models.AuthorAbs
+play.exceptions.CompilationException: net.parnassoft.playutilities.annotations.CastType cannot be resolved
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:277)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:164)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+11:00:46,674 ERROR ~ 
+
+@69fb77e66
+Internal Server Error (500) for request GET /favicon.ico
+
+Compilation error (In /app/models/AuthorAbs.java around line 10)
+The file /app/models/AuthorAbs.java could not be compiled. Error raised is : net.parnassoft.playutilities.annotations.CastType cannot be resolved
+
+play.exceptions.CompilationException: net.parnassoft.playutilities.annotations.CastType cannot be resolved
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
+	at play.classloading.ApplicationClasses$ApplicationClass.compile(ApplicationClasses.java:277)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:164)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+11:01:02,230 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:01:02,236 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:01:02,237 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:01:02,241 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:01:02,242 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:01:03,148 WARN  ~ You're running Play! in DEV mode
+11:01:03,299 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:01:12,255 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:01:12,327 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:01:12,359 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
+11:01:12,594 DEBUG ~ ORACLE ENHANCED: models.Author
+11:01:12,721 DEBUG ~ Creating formatRecordTracking method for models.Author
+11:01:12,751 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
+11:01:17,266 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
+11:01:19,460 INFO  ~ Application 'demo-with-oracle' is now started !
+11:01:20,162 INFO  ~ Loaded initial data
+11:09:13,571 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:09:13,580 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:09:13,580 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:09:13,592 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:09:13,592 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:09:14,509 WARN  ~ You're running Play! in DEV mode
+11:09:14,666 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:09:44,310 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:09:45,843 ERROR ~ 
+
+@69fb8ca20
+Internal Server Error (500) for request GET /crud/author
+
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
+
+play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePlugin@53f78b68 on models.Quote
 	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
 	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
 	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
@@ -194,8 +198,9 @@ play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePl
 	at play.mvc.Router.load(Router.java:48)
 	at play.mvc.Router.detectChanges(Router.java:219)
 	at Invocation.HTTP Request(Play!)
-Caused by: java.lang.ClassCastException: $Proxy6 cannot be cast to javassist.bytecode.annotation.Annotation
-	at play.modules.oracle.OracleEnhancer.isEnhanceableThisClass(OracleEnhancer.java:151)
+Caused by: java.lang.NullPointerException
+	at net.parnassoft.playutilities.EnhancerUtility.fieldType(EnhancerUtility.java:325)
+	at play.modules.oracle.OracleEnhancer.isEnhanceableThisClass(OracleEnhancer.java:144)
 	at play.modules.oracle.OracleEnhancer.enhanceThisClass(OracleEnhancer.java:42)
 	at play.modules.oracle.OraclePlugin.enhance(OraclePlugin.java:25)
 	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
@@ -274,18 +279,15 @@ Caused by: java.lang.ClassCastException: $Proxy6 cannot be cast to javassist.byt
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
 	at Template_1000.run(routes:2)
 	... 9 more
-10:33:30,201 DEBUG ~ willBeSaved
-10:33:30,201 DEBUG ~ avoidCascadeSaveLoops
-10:33:30,201 DEBUG ~ quotes
-10:33:30,228 ERROR ~ 
+11:09:45,885 ERROR ~ 
 
-@69djd7ld0
+@69fb8ca24
 Internal Server Error (500) for request GET /favicon.ico
 
-Oops: ClassCastException
-An unexpected error occured caused by exception ClassCastException: $Proxy6 cannot be cast to javassist.bytecode.annotation.Annotation
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePlugin@359b46dc on models.AuthorAbs
+play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePlugin@53f78b68 on models.Quote
 	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
 	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
 	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
@@ -307,8 +309,9 @@ play.exceptions.UnexpectedException: While applying play.modules.oracle.OraclePl
 	at play.mvc.Router.load(Router.java:48)
 	at play.mvc.Router.detectChanges(Router.java:219)
 	at Invocation.HTTP Request(Play!)
-Caused by: java.lang.ClassCastException: $Proxy6 cannot be cast to javassist.bytecode.annotation.Annotation
-	at play.modules.oracle.OracleEnhancer.isEnhanceableThisClass(OracleEnhancer.java:151)
+Caused by: java.lang.NullPointerException
+	at net.parnassoft.playutilities.EnhancerUtility.fieldType(EnhancerUtility.java:325)
+	at play.modules.oracle.OracleEnhancer.isEnhanceableThisClass(OracleEnhancer.java:144)
 	at play.modules.oracle.OracleEnhancer.enhanceThisClass(OracleEnhancer.java:42)
 	at play.modules.oracle.OraclePlugin.enhance(OraclePlugin.java:25)
 	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
@@ -374,501 +377,797 @@ Caused by: java.lang.ClassCastException: $Proxy6 cannot be cast to javassist.byt
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
 	at Template_1000.run(routes:2)
 	... 9 more
-10:35:34,401 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:35:34,407 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:35:34,410 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:35:34,411 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:35:34,411 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:35:35,207 WARN  ~ You're running Play! in DEV mode
-10:35:35,343 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:35:46,294 DEBUG ~ willBeSaved
-10:35:46,294 DEBUG ~ avoidCascadeSaveLoops
-10:35:46,294 DEBUG ~ quotes
-10:35:46,305 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:35:46,305 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:35:46,305 DEBUG ~ pk
-10:35:46,307 DEBUG ~ @javax.persistence.Id
-10:35:46,307 DEBUG ~ first_name
-10:35:46,310 DEBUG ~ @play.data.validation.Required
-10:35:46,311 DEBUG ~ @play.data.validation.Unique
-10:35:46,311 DEBUG ~ last_name
-10:35:46,311 DEBUG ~ @play.data.validation.Required
-10:35:46,319 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:35:46,342 DEBUG ~ willBeSaved
-10:35:46,342 DEBUG ~ avoidCascadeSaveLoops
-10:35:46,342 DEBUG ~ author
-10:35:46,348 DEBUG ~ @javax.persistence.ManyToOne
-10:35:46,351 DEBUG ~ @javax.persistence.JoinColumn(name="author_id")
-10:35:46,351 DEBUG ~ @play.data.validation.Required
-10:35:46,351 DEBUG ~ id
-10:35:46,351 DEBUG ~ @javax.persistence.Id
-10:35:46,351 DEBUG ~ quotation
-10:35:46,351 DEBUG ~ @play.data.validation.Required
-10:35:46,354 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:35:46,392 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:35:46,426 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:35:46,571 DEBUG ~ willBeSaved
-10:35:46,571 DEBUG ~ avoidCascadeSaveLoops
-10:35:46,571 DEBUG ~ quotes
-10:35:46,571 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:35:46,571 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:35:46,571 DEBUG ~ pk
-10:35:46,575 DEBUG ~ @javax.persistence.SequenceGenerator(sequenceName="AuthorAbs_seq", initialValue=1, name="AuthorAbs_gen", allocationSize=1)
-10:35:46,575 DEBUG ~ @javax.persistence.GeneratedValue(generator="AuthorAbs_gen", strategy=javax.persistence.GenerationType.SEQUENCE)
-10:35:46,576 DEBUG ~ @javax.persistence.Id
-10:35:46,576 DEBUG ~ first_name
-10:35:46,576 DEBUG ~ @play.data.validation.Required
-10:35:46,576 DEBUG ~ @play.data.validation.Unique
-10:35:46,577 DEBUG ~ last_name
-10:35:46,577 DEBUG ~ @play.data.validation.Required
-10:35:46,577 DEBUG ~ age
-10:35:46,581 DEBUG ~ @play.modules.recordtracking.annotations.Mask
-10:35:46,581 DEBUG ~ @play.data.validation.Required
-10:35:46,582 DEBUG ~ @play.data.validation.Min(value=15.0)
-10:35:46,586 DEBUG ~ ORACLE ENHANCED: models.Author
-10:35:46,673 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:35:46,749 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:35:50,497 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:35:52,579 INFO  ~ Application 'demo' is now started !
-10:42:09,084 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:42:09,089 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:42:09,090 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:42:09,091 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:42:09,092 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:42:09,896 WARN  ~ You're running Play! in DEV mode
-10:42:10,031 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:42:20,475 DEBUG ~ models.AuthorAbs.willBeSaved
-10:42:20,475 DEBUG ~ models.AuthorAbs.avoidCascadeSaveLoops
-10:42:20,475 DEBUG ~ models.AuthorAbs.quotes
-10:42:20,480 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:42:20,480 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:42:20,481 DEBUG ~ models.AuthorAbs.pk
-10:42:20,482 DEBUG ~ @javax.persistence.Id
-10:42:20,482 DEBUG ~ models.AuthorAbs.first_name
-10:42:20,486 DEBUG ~ @play.data.validation.Required
-10:42:20,486 DEBUG ~ @play.data.validation.Unique
-10:42:20,486 DEBUG ~ models.AuthorAbs.last_name
-10:42:20,486 DEBUG ~ @play.data.validation.Required
-10:42:20,513 DEBUG ~ models.Quote.willBeSaved
-10:42:20,513 DEBUG ~ models.Quote.avoidCascadeSaveLoops
-10:42:20,513 DEBUG ~ models.Quote.author
-10:42:20,520 DEBUG ~ @javax.persistence.ManyToOne
-10:42:20,520 DEBUG ~ @javax.persistence.JoinColumn(name="author_id")
-10:42:20,520 DEBUG ~ @play.data.validation.Required
-10:42:20,520 DEBUG ~ models.Quote.id
-10:42:20,520 DEBUG ~ @javax.persistence.Id
-10:42:20,520 DEBUG ~ models.Quote.quotation
-10:42:20,520 DEBUG ~ @play.data.validation.Required
-10:42:20,551 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:42:20,585 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:42:20,732 DEBUG ~ models.Author.willBeSaved
-10:42:20,732 DEBUG ~ models.Author.avoidCascadeSaveLoops
-10:42:20,732 DEBUG ~ models.Author.quotes
-10:42:20,733 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:42:20,733 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:42:20,733 DEBUG ~ models.Author.pk
-10:42:20,734 DEBUG ~ @javax.persistence.Id
-10:42:20,734 DEBUG ~ models.Author.first_name
-10:42:20,734 DEBUG ~ @play.data.validation.Required
-10:42:20,734 DEBUG ~ @play.data.validation.Unique
-10:42:20,734 DEBUG ~ models.Author.last_name
-10:42:20,735 DEBUG ~ @play.data.validation.Required
-10:42:20,736 DEBUG ~ models.Author.age
-10:42:20,798 DEBUG ~ @play.modules.recordtracking.annotations.Mask
-10:42:20,799 DEBUG ~ @play.data.validation.Required
-10:42:20,802 DEBUG ~ @play.data.validation.Min(value=15.0)
-10:42:20,857 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:42:20,885 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:42:24,336 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:42:25,949 INFO  ~ Application 'demo' is now started !
-10:42:26,529 ERROR ~ 
+11:20:42,545 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:20:42,550 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:20:42,551 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:20:42,554 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:20:42,555 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:20:43,390 WARN  ~ You're running Play! in DEV mode
+11:20:43,524 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:21:06,877 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:21:06,948 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:07,062 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:07,682 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:08,100 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:08,205 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:08,377 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:08,548 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:08,997 ERROR ~ 
 
-@69djecb7d
-Error during job execution (jobs.Bootstrap)
+@69fb9p5mo
+Internal Server Error (500) for request GET /crud/author
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:42:27,167 ERROR ~ 
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@25e3bbd7 on models.Quote
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException
+	at play.modules.recordtracking.RecordTrackingEnhancer.createMethodOnPreUpdate(RecordTrackingEnhancer.java:576)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:59)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:124)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:21:09,061 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:09,087 ERROR ~ 
 
-@69djecb7d
-Internal Server Error (500) for request GET /
+@69fb9p5n2
+Internal Server Error (500) for request GET /favicon.ico
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:44:55,538 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:44:55,546 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:44:55,547 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:44:55,550 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:44:55,551 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:44:56,378 WARN  ~ You're running Play! in DEV mode
-10:44:56,514 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:45:05,137 DEBUG ~ models.AuthorAbs.willBeSaved
-10:45:05,138 DEBUG ~ models.AuthorAbs.avoidCascadeSaveLoops
-10:45:05,138 DEBUG ~ models.AuthorAbs.quotes
-10:45:05,150 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:45:05,156 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:45:05,157 DEBUG ~ models.AuthorAbs.pk
-10:45:05,160 DEBUG ~ @javax.persistence.Id
-10:45:05,160 DEBUG ~ models.AuthorAbs.first_name
-10:45:05,164 DEBUG ~ @play.data.validation.Required
-10:45:05,164 DEBUG ~ @play.data.validation.Unique
-10:45:05,165 DEBUG ~ models.AuthorAbs.last_name
-10:45:05,165 DEBUG ~ @play.data.validation.Required
-10:45:05,195 DEBUG ~ models.Quote.willBeSaved
-10:45:05,195 DEBUG ~ models.Quote.avoidCascadeSaveLoops
-10:45:05,195 DEBUG ~ models.Quote.author
-10:45:05,201 DEBUG ~ @javax.persistence.ManyToOne
-10:45:05,201 DEBUG ~ @javax.persistence.JoinColumn(name="author_id")
-10:45:05,201 DEBUG ~ @play.data.validation.Required
-10:45:05,201 DEBUG ~ models.Quote.id
-10:45:05,202 DEBUG ~ @javax.persistence.Id
-10:45:05,202 DEBUG ~ models.Quote.quotation
-10:45:05,202 DEBUG ~ @play.data.validation.Required
-10:45:05,247 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:45:05,277 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:45:05,430 DEBUG ~ models.Author.willBeSaved
-10:45:05,430 DEBUG ~ models.Author.avoidCascadeSaveLoops
-10:45:05,432 DEBUG ~ models.Author.quotes
-10:45:05,432 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:45:05,433 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:45:05,436 DEBUG ~ models.Author.pk
-10:45:05,436 DEBUG ~ @javax.persistence.Id
-10:45:05,436 DEBUG ~ models.Author.first_name
-10:45:05,437 DEBUG ~ @play.data.validation.Required
-10:45:05,437 DEBUG ~ @play.data.validation.Unique
-10:45:05,440 DEBUG ~ models.Author.last_name
-10:45:05,443 DEBUG ~ @play.data.validation.Required
-10:45:05,444 DEBUG ~ models.Author.age
-10:45:05,452 DEBUG ~ @play.modules.recordtracking.annotations.Mask
-10:45:05,453 DEBUG ~ @play.data.validation.Required
-10:45:05,459 DEBUG ~ @play.data.validation.Min(value=15.0)
-10:45:05,531 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:45:05,558 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:45:08,863 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:45:10,506 INFO  ~ Application 'demo' is now started !
-10:45:11,122 ERROR ~ 
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@25e3bbd7 on models.Quote
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException
+	at play.modules.recordtracking.RecordTrackingEnhancer.createMethodOnPreUpdate(RecordTrackingEnhancer.java:576)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:59)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:21:09,160 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:21:09,205 ERROR ~ 
 
-@69djelkjm
-Error during job execution (jobs.Bootstrap)
+@69fb9p5n3
+Internal Server Error (500) for request GET /favicon.ico
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:45:11,793 ERROR ~ 
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@25e3bbd7 on models.Quote
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException
+	at play.modules.recordtracking.RecordTrackingEnhancer.createMethodOnPreUpdate(RecordTrackingEnhancer.java:576)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:59)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:24:42,771 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:24:42,776 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:24:42,777 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:24:42,778 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:24:42,778 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:24:43,634 WARN  ~ You're running Play! in DEV mode
+11:24:43,818 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:25:01,175 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:25:01,210 DEBUG ~ NO @Id field..............
+11:25:01,245 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:01,322 DEBUG ~ NO @Id field..............
+11:25:01,367 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:01,875 DEBUG ~ NO @Id field..............
+11:25:01,953 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:02,267 DEBUG ~ NO @Id field..............
+11:25:02,342 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:02,430 DEBUG ~ NO @Id field..............
+11:25:02,483 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:02,605 DEBUG ~ NO @Id field..............
+11:25:02,658 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:02,807 DEBUG ~ NO @Id field..............
+11:25:02,831 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:03,230 ERROR ~ 
 
-@69djelkjm
-Internal Server Error (500) for request GET /
+@69fbaceci
+Internal Server Error (500) for request GET /crud/author
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:47:31,731 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:47:31,739 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:47:31,739 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:47:31,745 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:47:31,746 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:47:32,541 WARN  ~ You're running Play! in DEV mode
-10:47:32,666 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:47:45,934 DEBUG ~ models.AuthorAbs.willBeSaved
-10:47:45,935 DEBUG ~ models.AuthorAbs.avoidCascadeSaveLoops
-10:47:45,935 DEBUG ~ models.AuthorAbs.quotes
-10:47:45,945 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:47:45,946 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:47:45,946 DEBUG ~ models.AuthorAbs.pk
-10:47:45,948 DEBUG ~ @javax.persistence.Id
-10:47:45,948 DEBUG ~ models.AuthorAbs.first_name
-10:47:45,954 DEBUG ~ @play.data.validation.Required
-10:47:45,954 DEBUG ~ @play.data.validation.Unique
-10:47:45,955 DEBUG ~ models.AuthorAbs.last_name
-10:47:45,955 DEBUG ~ @play.data.validation.Required
-10:47:46,012 DEBUG ~ models.Quote.willBeSaved
-10:47:46,013 DEBUG ~ models.Quote.avoidCascadeSaveLoops
-10:47:46,013 DEBUG ~ models.Quote.author
-10:47:46,019 DEBUG ~ @javax.persistence.ManyToOne
-10:47:46,019 DEBUG ~ @javax.persistence.JoinColumn(name="author_id")
-10:47:46,019 DEBUG ~ @play.data.validation.Required
-10:47:46,020 DEBUG ~ models.Quote.id
-10:47:46,020 DEBUG ~ @javax.persistence.Id
-10:47:46,020 DEBUG ~ models.Quote.quotation
-10:47:46,020 DEBUG ~ @play.data.validation.Required
-10:47:46,106 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:47:46,181 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:47:46,338 DEBUG ~ models.Author.willBeSaved
-10:47:46,338 DEBUG ~ models.Author.avoidCascadeSaveLoops
-10:47:46,344 DEBUG ~ models.Author.quotes
-10:47:46,344 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:47:46,345 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:47:46,345 DEBUG ~ models.Author.pk
-10:47:46,345 DEBUG ~ @javax.persistence.Id
-10:47:46,345 DEBUG ~ models.Author.first_name
-10:47:46,345 DEBUG ~ @play.data.validation.Required
-10:47:46,345 DEBUG ~ @play.data.validation.Unique
-10:47:46,345 DEBUG ~ models.Author.last_name
-10:47:46,346 DEBUG ~ @play.data.validation.Required
-10:47:46,346 DEBUG ~ models.Author.age
-10:47:46,349 DEBUG ~ @play.modules.recordtracking.annotations.Mask
-10:47:46,349 DEBUG ~ @play.data.validation.Required
-10:47:46,349 DEBUG ~ @play.data.validation.Min(value=15.0)
-10:47:46,438 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:47:46,459 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:47:49,925 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:47:51,933 INFO  ~ Application 'demo' is now started !
-10:47:52,482 ERROR ~ 
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@1aef4504 on models.Quote
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException
+	at play.modules.recordtracking.RecordTrackingEnhancer.createMethodOnPreUpdate(RecordTrackingEnhancer.java:576)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:59)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:124)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:25:03,320 DEBUG ~ NO @Id field..............
+11:25:03,366 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:25:03,409 ERROR ~ 
 
-@69djf4pcl
-Error during job execution (jobs.Bootstrap)
+@69fbacecm
+Internal Server Error (500) for request GET /favicon.ico
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: NullPointerException
+An unexpected error occured caused by exception NullPointerException: null
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:47:53,130 ERROR ~ 
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@1aef4504 on models.Quote
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException
+	at play.modules.recordtracking.RecordTrackingEnhancer.createMethodOnPreUpdate(RecordTrackingEnhancer.java:576)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:59)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:30:36,079 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:30:36,086 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:30:36,088 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:30:36,088 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:30:36,089 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:30:36,947 WARN  ~ You're running Play! in DEV mode
+11:30:37,108 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:30:49,632 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:30:49,664 WARN  ~ WARNING: there is NO fields annotated with @Id
+11:30:49,693 WARN  ~ WARNING: there is NO fields annotated with @Id
+11:30:49,873 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:50,010 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:50,447 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:50,761 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:50,927 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:50,994 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:51,169 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:51,662 ERROR ~ 
 
-@69djf4pcl
-Internal Server Error (500) for request GET /
+@69fbb6a7i
+Internal Server Error (500) for request GET /crud/author
 
-Execution exception (In /app/jobs/Bootstrap.java around line 21)
-RuntimeException occured : Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
+Oops: CannotCompileException
+An unexpected error occured caused by exception CannotCompileException: ALERT:, modelWithId not found
 
-play.exceptions.JavaExecutionException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.jobs.Job.call(Job.java:155)
-	at Invocation.Job(Play!)
-Caused by: java.lang.RuntimeException: Cannot load fixture initial-data.yml: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at play.test.Fixtures.loadModels(Fixtures.java:237)
-	at jobs.Bootstrap.doJob(Bootstrap.java:21)
-	at play.jobs.Job.doJobWithResult(Job.java:50)
-	at play.jobs.Job.call(Job.java:146)
-	... 1 more
-Caused by: javax.persistence.PersistenceException: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1153)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:678)
-	at play.db.jpa.JPABase._save(JPABase.java:25)
-	at play.test.Fixtures.loadModels(Fixtures.java:215)
-	... 4 more
-Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): models.Author
-	at org.hibernate.id.Assigned.generate(Assigned.java:53)
-	at org.hibernate.event.def.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:121)
-	at org.hibernate.ejb.event.EJB3PersistEventListener.saveWithGeneratedId(EJB3PersistEventListener.java:69)
-	at org.hibernate.event.def.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:179)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:135)
-	at org.hibernate.event.def.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:61)
-	at org.hibernate.impl.SessionImpl.firePersist(SessionImpl.java:808)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:782)
-	at org.hibernate.impl.SessionImpl.persist(SessionImpl.java:786)
-	at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:672)
-	... 6 more
-10:51:46,720 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-10:51:46,725 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-10:51:46,726 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-10:51:46,729 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-10:51:46,729 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-10:51:47,673 WARN  ~ You're running Play! in DEV mode
-10:51:47,803 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-10:52:03,419 DEBUG ~ models.AuthorAbs.willBeSaved
-10:52:03,420 DEBUG ~ models.AuthorAbs.avoidCascadeSaveLoops
-10:52:03,420 DEBUG ~ models.AuthorAbs.quotes
-10:52:03,425 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:52:03,426 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:52:03,427 DEBUG ~ models.AuthorAbs.pk
-10:52:03,429 DEBUG ~ @javax.persistence.Id
-10:52:03,429 DEBUG ~ @Id FOUND...............
-10:52:03,429 DEBUG ~ models.AuthorAbs.first_name
-10:52:03,434 DEBUG ~ @play.data.validation.Required
-10:52:03,434 DEBUG ~ @play.data.validation.Unique
-10:52:03,434 DEBUG ~ models.AuthorAbs.last_name
-10:52:03,434 DEBUG ~ @play.data.validation.Required
-10:52:03,443 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
-10:52:03,468 DEBUG ~ models.Quote.willBeSaved
-10:52:03,469 DEBUG ~ models.Quote.avoidCascadeSaveLoops
-10:52:03,469 DEBUG ~ models.Quote.author
-10:52:03,474 DEBUG ~ @javax.persistence.ManyToOne
-10:52:03,474 DEBUG ~ @javax.persistence.JoinColumn(name="author_id")
-10:52:03,474 DEBUG ~ @play.data.validation.Required
-10:52:03,474 DEBUG ~ models.Quote.id
-10:52:03,475 DEBUG ~ @javax.persistence.Id
-10:52:03,477 DEBUG ~ @Id FOUND...............
-10:52:03,477 DEBUG ~ models.Quote.quotation
-10:52:03,478 DEBUG ~ @play.data.validation.Required
-10:52:03,482 DEBUG ~ ORACLE ENHANCED: models.Quote
-10:52:03,514 DEBUG ~ Creating formatRecordTracking method for models.Quote
-10:52:03,548 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
-10:52:03,734 DEBUG ~ models.Author.willBeSaved
-10:52:03,735 DEBUG ~ models.Author.avoidCascadeSaveLoops
-10:52:03,735 DEBUG ~ models.Author.quotes
-10:52:03,736 DEBUG ~ @javax.persistence.OneToMany(fetch=javax.persistence.FetchType.LAZY, cascade={javax.persistence.CascadeType.ALL}, mappedBy="author")
-10:52:03,737 DEBUG ~ @net.parnassoft.playutilities.annotations.CastType(type=<models.Quote class>)
-10:52:03,737 DEBUG ~ models.Author.pk
-10:52:03,738 DEBUG ~ @javax.persistence.SequenceGenerator(sequenceName="AuthorAbs_seq", initialValue=1, name="AuthorAbs_gen", allocationSize=1)
-10:52:03,738 DEBUG ~ @javax.persistence.GeneratedValue(generator="AuthorAbs_gen", strategy=javax.persistence.GenerationType.SEQUENCE)
-10:52:03,738 DEBUG ~ @javax.persistence.Id
-10:52:03,738 DEBUG ~ @Id FOUND...............
-10:52:03,739 DEBUG ~ models.Author.first_name
-10:52:03,739 DEBUG ~ @play.data.validation.Required
-10:52:03,739 DEBUG ~ @play.data.validation.Unique
-10:52:03,740 DEBUG ~ models.Author.last_name
-10:52:03,740 DEBUG ~ @play.data.validation.Required
-10:52:03,741 DEBUG ~ models.Author.age
-10:52:03,746 DEBUG ~ @play.modules.recordtracking.annotations.Mask
-10:52:03,746 DEBUG ~ @play.data.validation.Required
-10:52:03,748 DEBUG ~ @play.data.validation.Min(value=15.0)
-10:52:03,753 DEBUG ~ ORACLE ENHANCED: models.Author
-10:52:03,832 DEBUG ~ Creating formatRecordTracking method for models.Author
-10:52:03,866 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
-10:52:07,509 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
-10:52:09,813 INFO  ~ Application 'demo' is now started !
-10:52:10,400 INFO  ~ Loaded initial data
-11:07:55,121 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo
-11:07:55,126 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
-11:07:55,127 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
-11:07:55,130 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
-11:07:55,134 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
-11:07:55,950 WARN  ~ You're running Play! in DEV mode
-11:07:56,086 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@3d015a9e on models.Author
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.CannotCompileException: ALERT:, modelWithId not found
+	at play.modules.recordtracking.RecordTrackingEnhancer.createFillTrackDataMethod(RecordTrackingEnhancer.java:190)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:51)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:124)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:30:51,759 DEBUG ~ ORACLE ENHANCED: models.Author
+11:30:51,788 ERROR ~ 
+
+@69fbb6a7m
+Internal Server Error (500) for request GET /favicon.ico
+
+Oops: CannotCompileException
+An unexpected error occured caused by exception CannotCompileException: ALERT:, modelWithId not found
+
+play.exceptions.UnexpectedException: While applying play.modules.recordtracking.RecordTrackingPlugin@3d015a9e on models.Author
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:511)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at {module:crud}/app/views/tags/crud/types.tag.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at {module:crud}/conf/routes.(line:4)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:187)
+	at play.mvc.Router.parse(Router.java:162)
+	at play.mvc.Router.parse(Router.java:190)
+	at play.mvc.Router.parse(Router.java:164)
+	at play.mvc.Router.load(Router.java:48)
+	at play.mvc.Router.detectChanges(Router.java:219)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.CannotCompileException: ALERT:, modelWithId not found
+	at play.modules.recordtracking.RecordTrackingEnhancer.createFillTrackDataMethod(RecordTrackingEnhancer.java:190)
+	at play.modules.recordtracking.RecordTrackingEnhancer.enhanceThisClass(RecordTrackingEnhancer.java:51)
+	at play.modules.recordtracking.RecordTrackingPlugin.enhance(RecordTrackingPlugin.java:21)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:506)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:165)
+	at play.classloading.ApplicationClassloader.loadClass(ApplicationClassloader.java:84)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at play.classloading.ApplicationClasses.getAssignableClasses(ApplicationClasses.java:67)
+	at play.classloading.ApplicationClassloader.getAssignableClasses(ApplicationClassloader.java:455)
+	at play.classloading.ApplicationClassloader$getAssignableClasses.call(Unknown Source)
+	at Template_1001$_run_closure1.doCall(types.tag:6)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1001$_run_closure1.doCall(types.tag)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1001.run(types.tag:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:232)
+	at play.templates.GroovyTemplate$ExecutableTemplate.invokeTag(GroovyTemplate.java:379)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:161)
+	at Template_1000$_run_closure1.doCall(routes:41)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:66)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at Template_1000$_run_closure1.doCall(routes)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:273)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:886)
+	at groovy.lang.Closure.call(Closure.java:282)
+	at groovy.lang.Closure.call(Closure.java:277)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:99)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.access$300(GroovyCategorySupport.java:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:239)
+	at org.codehaus.groovy.runtime.DefaultGroovyMethods.use(DefaultGroovyMethods.java:333)
+	at org.codehaus.groovy.runtime.dgm$723.invoke(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoMetaMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:307)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:153)
+	at Template_1000.run(routes:2)
+	... 9 more
+11:32:37,941 INFO  ~ Starting /Volumes/PRO/Play/recordtracking/samples-and-tests/demo-with-oracle
+11:32:37,947 INFO  ~ Module crud is available (/usr/local/play-1.2.4/modules/crud)
+11:32:37,948 INFO  ~ Module recordtracking is available (/Volumes/PRO/Play/recordtracking/samples-and-tests/demo/../../../recordtracking)
+11:32:37,952 INFO  ~ Module secure is available (/usr/local/play-1.2.4/modules/secure)
+11:32:37,953 INFO  ~ Module oracle is available (/Volumes/PRO/Play/oracle/samples-and-tests/demo/../../../oracle)
+11:32:38,921 WARN  ~ You're running Play! in DEV mode
+11:32:39,067 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+11:32:48,340 DEBUG ~ ORACLE ENHANCED: models.AuthorAbs
+11:32:48,372 DEBUG ~ ORACLE ENHANCED: models.Quote
+11:32:48,409 DEBUG ~ Creating formatRecordTracking method for models.Quote
+11:32:48,445 DEBUG ~ RECORD_TRACKING ENHANCED: models.Quote
+11:32:48,620 DEBUG ~ ORACLE ENHANCED: models.Author
+11:32:48,801 DEBUG ~ Creating formatRecordTracking method for models.Author
+11:32:48,865 DEBUG ~ RECORD_TRACKING ENHANCED: models.Author
+11:32:53,675 INFO  ~ Connected to jdbc:oracle:thin:@10.10.1.22:1521:orcl
+11:32:55,556 INFO  ~ Application 'demo-with-oracle' is now started !
+11:32:56,107 INFO  ~ Loaded initial data

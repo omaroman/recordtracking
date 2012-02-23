@@ -1,25 +1,125 @@
-======================[2012-02-17 10:52:10,339]======================
+======================[2012-02-23 11:01:20,105]======================
 -----[BEGIN]-----
 POST PERSIST
-Fri Feb 17 10:52:10 CST 2012
+Thu Feb 23 11:01:20 CST 2012
 User: _YAML_
 
 <models.Author>
-@quotes_ids:null
+null:null
 @pk:1
 @first_name:Hombre
 @last_name:Radioactivo
 @age:**
 -----[ END ]-----
 
-======================[2012-02-17 10:52:10,393]======================
+======================[2012-02-23 11:01:20,155]======================
 -----[BEGIN]-----
 POST PERSIST
-Fri Feb 17 10:52:10 CST 2012
+Thu Feb 23 11:01:20 CST 2012
 User: _YAML_
 
 <models.Quote>
-@author_id:1
+@id:1
+@quotation:A darle átomos...
+-----[ END ]-----
+
+======================[2012-02-23 11:01:56,005]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:01:56 CST 2012
+User: elbarto
+
+<models.Author>
+null:null
+@pk:2
+@first_name:Joker
+@last_name:Clown
+@age:**
+-----[ END ]-----
+
+======================[2012-02-23 11:02:07,142]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:02:07 CST 2012
+User: elbarto
+
+<models.Quote>
+@id:2
+@quotation:Why so serious?
+-----[ END ]-----
+
+======================[2012-02-23 11:02:14,779]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:02:14 CST 2012
+User: elbarto
+
+<models.Quote>
+@id:2
+@quotation:Killing joke
+-----[ END ]-----
+
+======================[2012-02-23 11:02:21,456]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:02:21 CST 2012
+User: elbarto
+
+<models.Quote>
+@id:2
+@quotation:Mad Love
+-----[ END ]-----
+
+======================[2012-02-23 11:02:36,597]======================
+-----[BEGIN]-----
+PRE UPDATE
+Thu Feb 23 11:02:36 CST 2012
+User: elbarto
+
+<models.Author>
+@quotes_author_id's:4 2 
+@pk:2
+@first_name:Joker
+@last_name:Clown
+@age:**
+-----[ END ]-----
+
+======================[2012-02-23 11:02:36,606]======================
+-----[BEGIN]-----
+POST UPDATE
+Thu Feb 23 11:02:36 CST 2012
+User: elbarto
+
+<models.Author>
+@quotes_author_id's:4 2 
+@pk:2
+@first_name:Joker
+@last_name:Weyson
+@age:**
+-----[ END ]-----
+
+======================[2012-02-23 11:32:56,034]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:32:56 CST 2012
+User: _YAML_
+
+<models.Author>
+null:null
+@pk:1
+@first_name:Hombre
+@last_name:Radioactivo
+@age:**
+-----[ END ]-----
+
+======================[2012-02-23 11:32:56,100]======================
+-----[BEGIN]-----
+POST PERSIST
+Thu Feb 23 11:32:56 CST 2012
+User: _YAML_
+
+<models.Quote>
+null:1
 @id:1
 @quotation:A darle átomos...
 -----[ END ]-----

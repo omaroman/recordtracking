@@ -13,3 +13,10 @@
 /samples-and-tests/demo/test-result
 /samples-and-tests/demo/demo.ipr
 /.idea
+/samples-and-tests/demo-with-oracle/modules/*
+/samples-and-tests/demo-with-oracle/tmp/*
+/samples-and-tests/demo-with-oracle/logs/*
+/samples-and-tests/demo-with-oracle/data
+/samples-and-tests/demo-with-oracle/db
+/samples-and-tests/demo-with-oracle/test-result
+/samples-and-tests/demo-with-oraclex/demo.ipr
