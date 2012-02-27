@@ -23,8 +23,9 @@ public abstract class AuthorAbs extends GenericModel {
     // REVERSE ASSOCIATIONS
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // name of the variable in the other object that references this object
-    @Cast(type = Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
+    @Cast(Quote.class) // Due to type erasure, RecordTracking needs to be instructed which is the collection type
     public Set<Quote> quotes; // has_many :quotes
+    //public Quote quotes; // has_many :quotes
 
     /*@OneToOne(mappedBy = "author", cascade = CascadeType.ALL) // name of the variable in the other object that references this object
     public Quote quote;*/

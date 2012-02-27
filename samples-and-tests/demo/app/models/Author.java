@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "authors")
+@NamedNativeQuery(name="findMyself", query = "SELECT * FROM authors WHERE pk = :thePk", resultClass = Author.class)
 public class Author extends AuthorAbs {
 
     @Mask

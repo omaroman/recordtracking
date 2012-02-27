@@ -140,212 +140,34 @@ public class RecordTrackingEnhancer extends Enhancer {
      * @throws RecordTrackingException -
      * @throws NoSuchFieldException -
      * @throws ForeignKeyException -
+     * @throws TableNameException -
      */
     private void createFillTrackDataMethod() throws ClassNotFoundException, NotFoundException, RecordTrackingException, CannotCompileException, NoSuchFieldException, ForeignKeyException, TableNameException {
         //ctClass.getClassPool().importPackage("org.apache.commons.lang.StringUtils");
 
         StringBuilder code = new StringBuilder();
         code.append("public void _fill_track_data() {");
-        code.append("track_data = new java.util.LinkedHashMap();");
+        code.append("track_data = new java.util.LinkedHashMap();"); // Here's created an instance of LinkedHashMap
         code.append("String key = null;");
         code.append("String value = null;");
 
-        /*List<CtClass> mappedSupperClasses = EnhancerUtility.mappedSuperClassesUpToGenericModel(ctClass);
-
-        for (CtClass ctClass : mappedSupperClasses) {
-            List<CtField> persistentFields = EnhancerUtility.getAllPersistentFields(ctClass);*/
-
         List<CtField> persistentFields = EnhancerUtility.getAllPersistentFieldsUpToGenericModel(ctClass);
 
-            for (CtField ctField : persistentFields) {
-                if (EnhancerUtility.isRelationship(ctField)) {
-                    if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {
-                        // one-to-many (@OneToMany) or many-to-one (@ManyToOne) or many-to-many (@ManyToMany) association - A Collection (Set or List)
-                        // Get all "primary key fields" from unknown children by using a native Query in order to skip the loading of a collection of objects
+        for (CtField ctField : persistentFields) {
+            
+            if (EnhancerUtility.isRelationship(ctField)) {
 
-                        // NOTE:
-                        // Java implements generics with type erasure. The compiler uses this type information only for
-                        // safety checks, the byte code doesn't contain any information about generic types.
-                        // Consequently, the runtime doesn't know about it either, so you cannot retrieve it by reflection.
+                // <--------
+                code.append(fillTrackDataForRelationshipFields(ctField));
+                // <--------
 
-                        Cast cast = (Cast) EnhancerUtility.getAnnotation(ctField, Cast.class);
-                        if (cast == null || cast.type() == null) {
-                            String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
-                            throw new RecordTrackingException(error);
-                        }
-
-                        CtClass type;
-                        try {
-                            type = classPool.get(cast.type().getName());
-                        } catch (NotFoundException e) {
-                            String error = String.format("%s not found in class pool", cast.type().getName());
-                            throw new CannotCompileException(error);
-                        }
-                        play.Logger.debug("MASTER: %s", type.getName());
-                        play.Logger.debug("SLAVE: %s", ctClass.getName());
-                        String modelClass;
-                        String idField;
-                        String table = EnhancerUtility.getTableName(type);
-
-                        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(type);
-                        if (modelWithId != null) {
-                            //modelClass = modelWithId.getKey().getName();
-                            idField = modelWithId.getValue().getName();
-                            /*if (modelClass.equals(Model.class.getName())) {
-                                table = EnhancerUtility.getTableName(type);
-                            } else {
-                                table = EnhancerUtility.getTableName(modelWithId.getKey());
-                            }*/
-                        } else {
-                            throw new CannotCompileException("ALERT: modelWithId not found");
-                        }
-
-                        if (EnhancerUtility.isInverseRelationship(ctField)) {  // && isOneToMany
-                            // NOTE: This only works for INVERSE associations
-                            String slavePK = EnhancerUtility.getPrimaryKeyFieldName(type);
-                            String slaveFK = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // master & slave
-                            Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
-                            CtClass model = modelField.getKey(); // the model
-                            CtField masterPK = modelField.getValue(); // the field
-
-                            code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(masterPK.getName()).append(";");
-                            code.append("StringBuilder query = new StringBuilder();");
-                            code.append("query.append(\"SELECT \");");
-                            code.append("query.append(\"").append(idField).append("\");");
-                            code.append("query.append(\" FROM \");");
-                            code.append("query.append(\"").append(table).append("\");");
-                            code.append("query.append(\" WHERE \");");
-                            code.append("query.append(\"").append(slaveFK).append("\");");
-                            code.append("query.append(\" = \");");
-                            code.append("query.append(fkValue);");
-                            code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
-                            code.append("StringBuilder valueSB = new StringBuilder();");
-                            code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
-                            code.append("while (rs.next()) {");
-                            code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
-                            code.append("valueSB.append(_id.toString()).append(' ');");
-                            code.append("}"); // end while block
-                            code.append("key = \"@").append(ctField.getName()).append("_").append(slavePK).append("'s\";");
-                            code.append("if (valueSB.length() == 0) {");
-                            code.append("valueSB.append(\"__NONE__\");");
-                            //code.append("} else {");
-                            //code.append("for (java.util.Iterator i = fkList.iterator(); i.hasNext(); ) {");
-                            //code.append("valueSB.append(i.next().toString()").append(").append(' ');");
-                            //code.append("}");   // end for block
-                            code.append("}");   // end if block
-                            code.append("track_data.put(key, valueSB.toString());");
-                        } else { // Normal Relationship
-                            // TODO: Get the union table name
-
-                            // TODO: Get the primary key from refEntity & refField
-                        }
-
-                        /*code.append("key = \"@").append(ctField.getName()).append("_ids\";");
-                        code.append("StringBuilder valueSB = new StringBuilder();");
-                        code.append("if (").append(ctField.getName()).append(" != null) {");
-                        code.append("for (java.util.Iterator i =").append(ctField.getName()).append(".iterator(); i.hasNext(); ) {");
-                        code.append(modelClass).append(" model = (").append(modelClass).append(") i.next();"); // Cast to Model (or to What???)
-                        code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
-                        code.append("valueSB.append(\"null\").append(' ');");
-                        code.append("} else {");
-                        code.append("valueSB.append(((").append(modelClass).append(")model).").append(idField).append(").append(' ');");
-                        code.append("}");   // end if
-                        code.append("}");   // end for
-                        code.append("} else {");
-                        code.append("valueSB.append(\"null\");");
-                        code.append("}");   // end if
-                        code.append("track_data.put(key, valueSB.toString());");*/
-                    } else {    // one-to-one association (@OneToOne)
-
-                        CtClass type = ctField.getType();
-                        String modelClass;
-                        String idField;
-                        //String table;
-
-                        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
-                        if (modelWithId != null) {
-                            modelClass = modelWithId.getKey().getName();
-                            idField = modelWithId.getValue().getName();
-                            //table = getTableName(type); // The model annotated with @Entity
-                        } else {
-                            throw new CannotCompileException("WATCH OUT: modelWithId not found");
-                        }
-
-
-                        String slavePK = EnhancerUtility.getPrimaryKeyFieldName(type);
-                        /*// TODO: I guess this works only for NORMAL associations
-                        //String fk = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // refClass & refField
-                        String fk = EnhancerUtility.getRelationshipKeyFieldName(Relationship.NORMAL, ctClass, type); // refClass & refField
-                        Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
-                        CtClass model = modelField.getKey();
-                        CtField pk = modelField.getValue();
-
-                        //code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(pk.getName()).append(";");
-                        code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(fk).append(";");
-                        code.append("StringBuilder query = new StringBuilder();");
-                        code.append("query.append(\"SELECT \");");
-                        code.append("query.append(\"").append(idField).append("\");");
-                        code.append("query.append(\" FROM \");");
-                        code.append("query.append(\"").append(table).append("\");");
-                        code.append("query.append(\" WHERE \");");
-                        //code.append("query.append(\"").append(fk).append("\");");
-                        code.append("query.append(\"").append(pk).append("\");");
-                        code.append("query.append(\" = \");");
-                        code.append("query.append(fkValue);");
-                        code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
-                        code.append("StringBuilder valueSB = new StringBuilder();");
-                        code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
-                        code.append("key = \"@").append(ctField.getName()).append("_").append(fk).append("\";");
-                        code.append("if (rs.next()) {");
-                        code.append("while (rs.next()) {");
-                        code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
-                        code.append("value = _id.toString();");
-                        code.append("}"); // end while block
-                        code.append("} else {");
-                        code.append("value = \"null\";");
-                        code.append("}");   // end if block
-                        code.append("track_data.put(key, valueSB.toString());");*/
-
-                        // NOTE: No nativeQuery needed when is not a collection
-
-                        code.append("key = \"@").append(ctField.getName()).append("_").append(slavePK).append("\";");
-                        code.append(modelClass).append(" model = (").append(modelClass).append(")this.").append(ctField.getName()).append(";");
-                        code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
-                        code.append("value = \"__NONE__\";");
-                        code.append("} else {");
-                        code.append("value = ((").append(modelClass).append(")model).").append(idField).append(".toString();");
-                        code.append("}");   // end if
-                        code.append("track_data.put(key, value);");
-                    }
-                } else {  // Non-Relationship Field
-                    if (EnhancerUtility.hasAnnotation(ctField, Mask.class.getName())) { // Mask Value
-                        if (ctField.getType().isPrimitive()) {
-                            // Create and instance wrapper of the primitive in order to invoke its toString method
-                            code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ").append(buildNewPrimitiveWrapper(ctField)).append(".toString().length());");
-                        } else {
-                            code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
-                            code.append("value = \"__NONE__\";");
-                            code.append("} else {");
-                            code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString().length());");
-                            code.append("}");   // end if
-                        }
-                    } else {    // NO Mask Value
-                        if (ctField.getType().isPrimitive()) {
-                            // Create and instance wrapper of the primitive in order to invoke its toString method
-                            code.append("value = (").append(buildNewPrimitiveWrapper(ctField)).append(").toString();");
-                        } else {
-                            code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
-                            code.append("value = \"__NONE__\";");
-                            code.append("} else {");
-                            code.append("value = ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString();");
-                            code.append("}");   // end if
-                        }
-                    }
-                    code.append("key = \"@").append(ctField.getName()).append("\";");
-                    code.append("track_data.put(key, value);");
-                }
+            } else {  // None-Relationship Field
+                // <=====
+                code.append(fillTrackDataForNoneRelationshipFields(ctField));
+                // <=====
             }
-        /*}*/
+        }
+        
 
         // Print track_data, Uncomment the block just for debugging proposes
         /*code.append("java.util.Iterator entries = track_data.entrySet().iterator();");
@@ -362,6 +184,224 @@ public class RecordTrackingEnhancer extends Enhancer {
 
         final CtMethod fillTrackData = CtMethod.make(code.toString(), ctClass);
         ctClass.addMethod(fillTrackData);
+    }
+    
+    private String fillTrackDataForRelationshipFields(CtField ctField) throws NotFoundException, ClassNotFoundException, RecordTrackingException, CannotCompileException, TableNameException, NoSuchFieldException, ForeignKeyException {
+        // TODO: Implement logic
+        StringBuilder code = new StringBuilder();
+
+        Relationship relationship = EnhancerUtility.getRelationshipType(ctField);
+        switch (relationship) {
+            case ONE_TO_MANY_INVERSE:
+                code.append(fillTrackDataForOneToManyInverseField(ctField));
+                break;
+            case ONE_TO_ONE_NORMAL:
+                code.append(fillTrackDataForOneToOneNormalField(ctField));
+        }
+        
+        /*if (EnhancerUtility.isList(ctField) || EnhancerUtility.isSet(ctField)) {
+            // one-to-many (@OneToMany) or many-to-one (@ManyToOne) or many-to-many (@ManyToMany) association - A Collection (Set or List)
+            // Get all "primary key fields" from unknown children by using a native Query in order to skip the loading of a collection of objects
+
+
+        } else {    // one-to-one association (@OneToOne_Normal)
+
+            // #####
+            code.append(fillTrackDataForOneToOneNormalField(ctField));
+            // #####
+        }*/
+
+        return code.toString();
+    }
+    
+    private String fillTrackDataForOneToManyInverseField(CtField ctField) throws ClassNotFoundException, RecordTrackingException, CannotCompileException, TableNameException, NotFoundException, NoSuchFieldException, ForeignKeyException {
+        // TODO: Implement logic
+        StringBuilder code = new StringBuilder();
+
+        // NOTE:
+        // Java implements generics with type erasure. The compiler uses this type information only for
+        // safety checks, the byte code doesn't contain any information about generic types.
+        // Consequently, the runtime doesn't know about it either, so you cannot retrieve it by reflection.
+
+        Cast cast = (Cast) EnhancerUtility.getAnnotation(ctField, Cast.class);
+        if (cast == null || cast.value() == null) {
+            String error = String.format("Unknown Cast Type for %s collection", ctField.getName());
+            throw new RecordTrackingException(error);
+        }
+
+        CtClass type;
+        try {
+            type = classPool.get(cast.value().getName());
+        } catch (NotFoundException e) {
+            String error = String.format("%s not found in class pool", cast.value().getName());
+            throw new CannotCompileException(error);
+        }
+        play.Logger.debug("MASTER: %s", type.getName());
+        play.Logger.debug("SLAVE: %s", ctClass.getName());
+        String modelClass;
+        String idField;
+        String table = EnhancerUtility.getTableName(type);
+
+        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(type);
+        if (modelWithId != null) {
+            //modelClass = modelWithId.getKey().getName();
+            idField = modelWithId.getValue().getName();
+        } else {
+            throw new CannotCompileException("ALERT: modelWithId not found");
+        }
+
+        //if (EnhancerUtility.isInverseRelationship(ctField)) {  // && isOneToMany
+        /*if (relationship == Relationship.ONE_TO_MANY_INVERSE) {*/
+            // NOTE: This only works for INVERSE associations
+            String slavePK = EnhancerUtility.getPrimaryKeyFieldName(type);
+            String slaveFK = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // master & slave
+            Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
+            CtClass model = modelField.getKey(); // the model
+            CtField masterPK = modelField.getValue(); // the field
+
+            code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(masterPK.getName()).append(";");
+            code.append("StringBuilder query = new StringBuilder();");
+            code.append("query.append(\"SELECT \");");
+            code.append("query.append(\"").append(idField).append("\");");
+            code.append("query.append(\" FROM \");");
+            code.append("query.append(\"").append(table).append("\");");
+            code.append("query.append(\" WHERE \");");
+            code.append("query.append(\"").append(slaveFK).append("\");");
+            code.append("query.append(\" = \");");
+            code.append("query.append(fkValue);");
+            code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
+            code.append("StringBuilder valueSB = new StringBuilder();");
+            code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
+            code.append("while (rs.next()) {");
+            code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
+            code.append("valueSB.append(_id.toString()).append(' ');");
+            code.append("}"); // end while block
+            code.append("key = \"@").append(ctField.getName()).append("_").append(slavePK).append("'s\";");
+            code.append("if (valueSB.length() == 0) {");
+            code.append("valueSB.append(\"__NONE__\");");
+            //code.append("} else {");
+            //code.append("for (java.util.Iterator i = fkList.iterator(); i.hasNext(); ) {");
+            //code.append("valueSB.append(i.next().toString()").append(").append(' ');");
+            //code.append("}");   // end for block
+            code.append("}");   // end if block
+            code.append("track_data.put(key, valueSB.toString());");
+        /*}*/
+
+        /*code.append("key = \"@").append(ctField.getName()).append("_ids\";");
+       code.append("StringBuilder valueSB = new StringBuilder();");
+       code.append("if (").append(ctField.getName()).append(" != null) {");
+       code.append("for (java.util.Iterator i =").append(ctField.getName()).append(".iterator(); i.hasNext(); ) {");
+       code.append(modelClass).append(" model = (").append(modelClass).append(") i.next();"); // Cast to Model (or to What???)
+       code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
+       code.append("valueSB.append(\"null\").append(' ');");
+       code.append("} else {");
+       code.append("valueSB.append(((").append(modelClass).append(")model).").append(idField).append(").append(' ');");
+       code.append("}");   // end if
+       code.append("}");   // end for
+       code.append("} else {");
+       code.append("valueSB.append(\"null\");");
+       code.append("}");   // end if
+       code.append("track_data.put(key, valueSB.toString());");*/
+
+        return code.toString();
+    }
+    
+    private String fillTrackDataForOneToOneNormalField(CtField ctField) throws NotFoundException, ClassNotFoundException, CannotCompileException {
+        StringBuilder code = new StringBuilder();
+
+        CtClass type = ctField.getType();
+        String modelClass;
+        String idField;
+        //String table;
+
+        Map.Entry<CtClass, CtField> modelWithId = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctField.getType());
+        if (modelWithId != null) {
+            modelClass = modelWithId.getKey().getName();
+            idField = modelWithId.getValue().getName();
+            //table = getTableName(type); // The model annotated with @Entity
+        } else {
+            throw new CannotCompileException("WATCH OUT: modelWithId not found");
+        }
+
+
+        String slavePK = EnhancerUtility.getPrimaryKeyFieldName(type);
+        /*// TODO: I guess this works only for NORMAL associations
+       //String fk = EnhancerUtility.getForeignKeyFieldName(type, ctClass); // refClass & refField
+       String fk = EnhancerUtility.getRelationshipKeyFieldName(Relationship.NORMAL, ctClass, type); // refClass & refField
+       Map.Entry<CtClass, CtField> modelField = EnhancerUtility.modelHavingFieldAnnotatedWithId(ctClass);
+       CtClass model = modelField.getKey();
+       CtField pk = modelField.getValue();
+
+       //code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(pk.getName()).append(";");
+       code.append("Long fkValue = ((").append(model.getName()).append(")this).").append(fk).append(";");
+       code.append("StringBuilder query = new StringBuilder();");
+       code.append("query.append(\"SELECT \");");
+       code.append("query.append(\"").append(idField).append("\");");
+       code.append("query.append(\" FROM \");");
+       code.append("query.append(\"").append(table).append("\");");
+       code.append("query.append(\" WHERE \");");
+       //code.append("query.append(\"").append(fk).append("\");");
+       code.append("query.append(\"").append(pk).append("\");");
+       code.append("query.append(\" = \");");
+       code.append("query.append(fkValue);");
+       code.append("play.Logger.debug(\"QUERY: %s\", new String[]{query.toString()});");
+       code.append("StringBuilder valueSB = new StringBuilder();");
+       code.append("java.sql.ResultSet rs = play.db.DB.executeQuery(query.toString());");
+       code.append("key = \"@").append(ctField.getName()).append("_").append(fk).append("\";");
+       code.append("if (rs.next()) {");
+       code.append("while (rs.next()) {");
+       code.append("Object _id = rs.getObject(\"").append(idField).append("\");");
+       code.append("value = _id.toString();");
+       code.append("}"); // end while block
+       code.append("} else {");
+       code.append("value = \"null\";");
+       code.append("}");   // end if block
+       code.append("track_data.put(key, valueSB.toString());");*/
+
+        // NOTE: No nativeQuery needed when is not a collection
+
+        code.append("key = \"@").append(ctField.getName()).append("_").append(slavePK).append("\";");
+        code.append(modelClass).append(" model = (").append(modelClass).append(")this.").append(ctField.getName()).append(";");
+        code.append("if (model == null || ((").append(modelClass).append(")model).").append(idField).append(" == null) {");
+        code.append("value = \"__NONE__\";");
+        code.append("} else {");
+        code.append("value = ((").append(modelClass).append(")model).").append(idField).append(".toString();");
+        code.append("}");   // end if
+        code.append("track_data.put(key, value);");
+
+        return code.toString();
+    }
+    
+    private String fillTrackDataForNoneRelationshipFields(CtField ctField) throws ClassNotFoundException, NotFoundException {
+        StringBuilder code = new StringBuilder();
+        
+        if (EnhancerUtility.hasAnnotation(ctField, Mask.class.getName())) { // Mask Value
+            if (ctField.getType().isPrimitive()) {
+                // Create and instance wrapper of the primitive in order to invoke its toString method
+                code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ").append(buildNewPrimitiveWrapper(ctField)).append(".toString().length());");
+            } else {
+                code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
+                code.append("value = \"__NONE__\";");
+                code.append("} else {");
+                code.append("value = org.apache.commons.lang.StringUtils.repeat(\"*\", ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString().length());");
+                code.append("}");   // end if
+            }
+        } else {    // NO Mask Value
+            if (ctField.getType().isPrimitive()) {
+                // Create and instance wrapper of the primitive in order to invoke its toString method
+                code.append("value = (").append(buildNewPrimitiveWrapper(ctField)).append(").toString();");
+            } else {
+                code.append("if (").append("((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(" == null) {");
+                code.append("value = \"__NONE__\";");
+                code.append("} else {");
+                code.append("value = ((").append(ctClass.getName()).append(")this).").append(ctField.getName()).append(".toString();");
+                code.append("}");   // end if
+            }
+        }
+        code.append("key = \"@").append(ctField.getName()).append("\";");
+        code.append("track_data.put(key, value);");
+        
+        return code.toString();
     }
 
     /**
